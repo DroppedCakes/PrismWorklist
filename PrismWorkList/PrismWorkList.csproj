@@ -109,15 +109,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Dapper">
-      <Version>1.50.5</Version>
-    </PackageReference>
-    <PackageReference Include="Dapper.FastCrud">
-      <Version>2.5.0.39</Version>
-    </PackageReference>
-    <PackageReference Include="Dapper.FastCrud.ModelGenerator">
-      <Version>2.4.1</Version>
-    </PackageReference>
     <PackageReference Include="MahApps.Metro">
       <Version>1.6.5</Version>
     </PackageReference>

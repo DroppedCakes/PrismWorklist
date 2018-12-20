@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.Login", "Pris
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.WorkList", "PrismWorkList.WorkList\PrismWorkList.WorkList.csproj", "{64AA5C4B-FAE6-4FB8-812C-9D0FC12B250E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.Infrastructure", "PrismWorkList.Infrastructure\PrismWorkList.Infrastructure.csproj", "{98245811-0DF5-446E-80B5-E6F1624E7C2E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.infrastructure", "PrismWorkList.infrastructure\PrismWorkList.infrastructure.csproj", "{81E7F409-4722-4670-A9D6-43550A943D9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{64AA5C4B-FAE6-4FB8-812C-9D0FC12B250E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64AA5C4B-FAE6-4FB8-812C-9D0FC12B250E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64AA5C4B-FAE6-4FB8-812C-9D0FC12B250E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98245811-0DF5-446E-80B5-E6F1624E7C2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98245811-0DF5-446E-80B5-E6F1624E7C2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98245811-0DF5-446E-80B5-E6F1624E7C2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98245811-0DF5-446E-80B5-E6F1624E7C2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81E7F409-4722-4670-A9D6-43550A943D9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81E7F409-4722-4670-A9D6-43550A943D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81E7F409-4722-4670-A9D6-43550A943D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81E7F409-4722-4670-A9D6-43550A943D9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
