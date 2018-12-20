@@ -11,7 +11,7 @@ namespace PrismWorkList.Login
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var regionMan = containerProvider.Resolve<IRegionManager>();
-            regionMan.RegisterViewWithRegion("ContentRegion", typeof(Views.LoginView));
+            regionMan.RegisterViewWithRegion("EditorArea", typeof(Views.LoginView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
