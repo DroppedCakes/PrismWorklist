@@ -1,17 +1,20 @@
 ﻿<controls:MetroWindow
-    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" x:Class="PrismWorkList.Views.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:prism="http://prismlibrary.com/"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
-        prism:ViewModelLocator.AutoWireViewModel="True"
-         Title="{Binding Title}" Height="600" Width="800"
-         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto">
+    x:Class="PrismWorkList.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    Title="{Binding Title}"
+    Width="800"
+    Height="600"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -21,13 +24,19 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <!-- data template used for the dialogs example, defines a View for a ViewModel of type DateTime  -->
+            <!--  data template used for the dialogs example, defines a View for a ViewModel of type DateTime  -->
             <DataTemplate DataType="{x:Type system:DateTime}">
                 <StackPanel Margin="16">
                     <TextBlock>England win the World Cup:</TextBlock>
-                    <TextBlock Margin="0 8 0 0" Text="{Binding }" />
-                    <TextBlock Margin="0 8 0 0" >You will never see that again.</TextBlock>
-                    <Button  Margin="0 8 0 0" IsDefault="True" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}">AWESOME</Button>
+                    <TextBlock Margin="0,8,0,0" Text="{Binding}" />
+                    <TextBlock Margin="0,8,0,0">You will never see that again.</TextBlock>
+                    <Button
+                        Margin="0,8,0,0"
+                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                        IsDefault="True"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
+                        AWESOME
+                    </Button>
                 </StackPanel>
             </DataTemplate>
         </ResourceDictionary>
@@ -35,21 +44,33 @@
 
     <Grid x:Name="BaseGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ToolBar x:Name="MainToolBar" Height="25"/>
-        <StatusBar x:Name="MainStatus" Grid.Row="2" Height="25"/>
+        <ToolBar x:Name="MainToolBar" Height="25" />
+        <StatusBar
+            x:Name="MainStatus"
+            Grid.Row="2"
+            Height="25" />
         <Grid x:Name="ClientGrid" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.3*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="0.3*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="0.7*" />
             </Grid.ColumnDefinitions>
-            <ContentControl x:Name="NaviTree" prism:RegionManager.RegionName="NaviTree" Grid.Column="0"></ContentControl>
-            <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Stretch"/>
-            <ContentControl x:Name="EditorArea" prism:RegionManager.RegionName="EditorArea" Grid.Column="2"></ContentControl>
+            <ContentControl
+                x:Name="NaviTree"
+                Grid.Column="0"
+                prism:RegionManager.RegionName="NaviTree" />
+            <GridSplitter
+                Grid.Column="1"
+                Width="3"
+                HorizontalAlignment="Stretch" />
+            <ContentControl
+                x:Name="EditorArea"
+                Grid.Column="2"
+                prism:RegionManager.RegionName="EditorArea" />
         </Grid>
     </Grid>
 
