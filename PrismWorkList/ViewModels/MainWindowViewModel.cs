@@ -4,7 +4,8 @@ namespace PrismWorkList.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private string _title = "WorkList";
+
+        private string _title = "Prism for WPF";
         public string Title
         {
             get { return _title; }

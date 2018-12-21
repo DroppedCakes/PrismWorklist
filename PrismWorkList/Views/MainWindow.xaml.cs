@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls;
+using NLog;
 using System.Windows;
 
 namespace PrismWorkList.Views
@@ -8,9 +9,18 @@ namespace PrismWorkList.Views
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        /// <summary>
+        /// logger
+        /// </summary>
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
+
     }
 }

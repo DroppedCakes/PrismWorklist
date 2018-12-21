@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace PrismWorkList.Login.Views
 {
@@ -10,6 +11,11 @@ namespace PrismWorkList.Login.Views
         public LoginView()
         {
             InitializeComponent();
+        }
+
+        private void QuitButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Close();
         }
     }
 }
