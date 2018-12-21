@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PrismWorkList.infrastructure.Properties {
+namespace PrismWorkList.Infrastructure.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

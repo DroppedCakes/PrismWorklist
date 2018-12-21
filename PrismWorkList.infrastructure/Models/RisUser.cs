@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrismWorkList.infrastructure.Models
+namespace PrismWorkList.Infrastructure.Models
 {
     public class RisUser
     {

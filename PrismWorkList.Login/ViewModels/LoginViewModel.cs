@@ -7,7 +7,7 @@ using System.Linq;
 using NLog;
 using System.Windows.Controls;
 using PrismWorkList.Infrastructure;
-using PrismWorkList.infrastructure.Models;
+using PrismWorkList.Infrastructure.Models;
 
 namespace PrismWorkList.Login.ViewModels
 {

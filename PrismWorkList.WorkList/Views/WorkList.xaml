@@ -16,6 +16,7 @@
             Height="Auto"
             Margin="19,20,-19,-20"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top" />
+            VerticalAlignment="Top"
+            ItemsSource="{Binding WorkList}"/>
     </Grid>
 </UserControl>

@@ -102,9 +102,9 @@
     <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PrismWorkList.infrastructure\PrismWorkList.infrastructure.csproj">
+    <ProjectReference Include="..\PrismWorkList.infrastructure\PrismWorkList.Infrastructure.csproj">
       <Project>{81e7f409-4722-4670-a9d6-43550a943d9f}</Project>
-      <Name>PrismWorkList.infrastructure</Name>
+      <Name>PrismWorkList.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

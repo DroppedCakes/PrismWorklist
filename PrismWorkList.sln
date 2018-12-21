@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.Login", "Pris
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.WorkList", "PrismWorkList.WorkList\PrismWorkList.WorkList.csproj", "{64AA5C4B-FAE6-4FB8-812C-9D0FC12B250E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.infrastructure", "PrismWorkList.infrastructure\PrismWorkList.infrastructure.csproj", "{81E7F409-4722-4670-A9D6-43550A943D9F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.Infrastructure", "PrismWorkList.infrastructure\PrismWorkList.Infrastructure.csproj", "{81E7F409-4722-4670-A9D6-43550A943D9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
