@@ -5,14 +5,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    d:DesignHeight="300"
-    d:DesignWidth="300"
     prism:ViewModelLocator.AutoWireViewModel="True"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Height="308.955" Width="317.91">
     <Grid>
         <DataGrid
             x:Name="WorkListDataGrid"
-            Width="20"
+            Width="auto"
             Height="Auto"
             Margin="19,20,-19,-20"
             HorizontalAlignment="Left"
