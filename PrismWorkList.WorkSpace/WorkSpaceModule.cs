@@ -2,6 +2,7 @@
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
+using PrismWorkList.WorkSpace.ViewModels;
 
 namespace PrismWorkList.WorkSpace
 {
@@ -14,7 +15,8 @@ namespace PrismWorkList.WorkSpace
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            
+            containerRegistry.RegisterSingleton<WorkSpaceViewModel>();
+            containerRegistry.RegisterForNavigation<WorkSpaceView>();
         }
     }
 }

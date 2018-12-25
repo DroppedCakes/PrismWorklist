@@ -135,6 +135,10 @@
       <Project>{fcb11ace-a771-4642-aa3c-40b3bf1a7793}</Project>
       <Name>PrismWorkList.Login</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PrismWorkList.WorkSpace\PrismWorkList.WorkSpace.csproj">
+      <Project>{01ad8ef2-a413-40a7-bb09-bbabd04cca1c}</Project>
+      <Name>PrismWorkList.WorkSpace</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

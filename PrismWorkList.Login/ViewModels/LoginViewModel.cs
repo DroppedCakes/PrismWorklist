@@ -8,6 +8,8 @@ using NLog;
 using System.Windows.Controls;
 using PrismWorkList.Infrastructure;
 using PrismWorkList.Infrastructure.Models;
+using PrismWorkList.WorkSpace.Views;
+using Prism.Ioc;
 
 namespace PrismWorkList.Login.ViewModels
 {
@@ -43,12 +45,12 @@ namespace PrismWorkList.Login.ViewModels
             set { this.SetProperty(ref this._password, value); }
         }
 
-        #region PasswordChanged
+    #region PasswordChanged
 
-        /// <summary>
-        ///
-        /// </summary>
-        public DelegateCommand<PasswordBox> PasswordChangedCommand { get; }
+    /// <summary>
+    ///
+    /// </summary>
+    public DelegateCommand<PasswordBox> PasswordChangedCommand { get; }
 
         /// <summary>
         ///
@@ -109,6 +111,8 @@ namespace PrismWorkList.Login.ViewModels
                 if (RisUser.IsPasswordValid(password))
                 {
                     //　ワークリスト画面に遷移
+                    var regionManager = CommonServiceLocator.ServiceLocator.Current.GetInstance<IRegionManager>();
+                    regionManager.RequestNavigate("ContentRegion", nameof(WorkSpaceView));
                 }
                 else
                 {

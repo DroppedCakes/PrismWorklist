@@ -106,6 +106,10 @@
       <Project>{81e7f409-4722-4670-a9d6-43550a943d9f}</Project>
       <Name>PrismWorkList.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PrismWorkList.WorkSpace\PrismWorkList.WorkSpace.csproj">
+      <Project>{01AD8EF2-A413-40A7-BB09-BBABD04CCA1C}</Project>
+      <Name>PrismWorkList.WorkSpace</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

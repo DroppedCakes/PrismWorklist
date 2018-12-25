@@ -6,6 +6,7 @@ using PrismWorkList.ViewModels;
 using PrismWorkList.Login;
 using Prism.Regions;
 using PrismWorkList.Login.Views;
+using PrismWorkList.WorkSpace;
 
 namespace PrismWorkList
 {
@@ -34,6 +35,7 @@ namespace PrismWorkList
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<LoginModule>(InitializationMode.WhenAvailable);
+            moduleCatalog.AddModule<WorkSpaceModule>();
         }
     }
 }
