@@ -10,12 +10,12 @@
     Width="800"
     Height="600"
     prism:ViewModelLocator.AutoWireViewModel="True"
+    SaveWindowPosition="True"
     TextElement.FontSize="13"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextOptions.TextFormattingMode="Ideal"
-    TextOptions.TextRenderingMode="Auto"
-    SaveWindowPosition="True">
+    TextOptions.TextRenderingMode="Auto">
 
     <Window.Resources>
 
@@ -64,15 +64,15 @@
             <ContentControl
                 x:Name="NaviTree"
                 Grid.Column="0"
-                prism:RegionManager.RegionName="NaviTree" />
+                prism:RegionManager.RegionName="NavigationRegion" />
             <GridSplitter
                 Grid.Column="1"
                 Width="3"
                 HorizontalAlignment="Stretch" />
             <ContentControl
-                x:Name="EditorArea"
+                x:Name="ContentRegion"
                 Grid.Column="2"
-                prism:RegionManager.RegionName="EditorArea" />
+                prism:RegionManager.RegionName="ContentRegion" />
         </Grid>
     </Grid>
 

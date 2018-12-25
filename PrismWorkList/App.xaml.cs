@@ -23,7 +23,7 @@ namespace PrismWorkList
         {
             base.OnInitialized();
             var region_manager = CommonServiceLocator.ServiceLocator.Current.GetInstance<IRegionManager>();
-            region_manager.RequestNavigate("EditorArea", nameof(LoginView));
+            region_manager.RequestNavigate("ContentRegion", nameof(LoginView));
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
