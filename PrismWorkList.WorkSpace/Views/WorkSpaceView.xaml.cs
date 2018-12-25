@@ -3,11 +3,11 @@
 namespace PrismWorkList.WorkSpace.Views
 {
     /// <summary>
-    /// Interaction logic for Criteria
+    /// Interaction logic for WorkSpace
     /// </summary>
-    public partial class Criteria : UserControl
+    public partial class WorkSpaceView : UserControl
     {
-        public Criteria()
+        public WorkSpaceView()
         {
             InitializeComponent();
         }
