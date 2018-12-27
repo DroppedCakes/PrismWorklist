@@ -8,6 +8,16 @@ namespace PrismWorkList.WorkSpace.ViewModels
 {
     public class CriteriaViewModel : BindableBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime StudyDateSince { get; set; } = DateTime.Now;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime StudyDateUntil { get; set; }=DateTime.Now;
+
         public CriteriaViewModel()
         {
 
