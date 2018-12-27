@@ -13,6 +13,7 @@
     SaveWindowPosition="True"
     TextElement.FontSize="13"
     TextElement.FontWeight="Regular"
+    FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto">

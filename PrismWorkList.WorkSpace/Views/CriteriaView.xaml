@@ -3,8 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:views="clr-namespace:PrismWorkList.WorkSpace.Views">
     <Grid>
-            
+        <StackPanel>
+            <DatePicker SelectedDateFormat="Long" SelectedDate="{Binding Path=StudyDateSince}" />
+            <TextBlock Text=" ～ " />
+            <DatePicker SelectedDateFormat="Long" SelectedDate="{Binding Path=StudyDateUntil}" />
+        </StackPanel>
+        <Button Content="検索" Command="{Binding Path=StudiesReloadCommand}" />
     </Grid>
 </UserControl>

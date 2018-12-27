@@ -51,12 +51,16 @@
   <ItemGroup>
     <Compile Include="ViewModels\CriteriaViewModel.cs" />
     <Compile Include="ViewModels\NavigatorViewModel.cs" />
+    <Compile Include="ViewModels\StudyViewModel.cs" />
     <Compile Include="ViewModels\WorkSpaceViewModel.cs" />
     <Compile Include="Views\CriteriaView.xaml.cs">
       <DependentUpon>CriteriaView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NavigatorView.xaml.cs">
       <DependentUpon>NavigatorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StudyView.xaml.cs">
+      <DependentUpon>StudyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WorkSpaceView.xaml.cs">
       <DependentUpon>WorkSpaceView.xaml</DependentUpon>
@@ -94,6 +98,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NavigatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StudyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
