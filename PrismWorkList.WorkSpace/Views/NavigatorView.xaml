@@ -4,4 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True" 
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"/>
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Button Grid.Column="0" Content="検査詳細表示" />
+        <Button Grid.Column="1" Content="患者情報編集" />
+        <Button Grid.Column="2" Content="設定" />
+        <Button Grid.Column="2" Content="終了" x:Name="QuitButton" Click="QuitButton_Click" />
+    </Grid>
+</UserControl>

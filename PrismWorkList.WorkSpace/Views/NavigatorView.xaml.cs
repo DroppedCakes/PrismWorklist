@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace PrismWorkList.WorkSpace.Views
 {
@@ -10,6 +11,11 @@ namespace PrismWorkList.WorkSpace.Views
         public NavigatorView()
         {
             InitializeComponent();
+        }
+
+        private void QuitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Close();
         }
     }
 }

@@ -8,9 +8,9 @@
     xmlns:views="clr-namespace:PrismWorkList.WorkSpace.Views"
     xmlns:vm="clr-namespace:PrismWorkList.WorkSpace.ViewModels"
     prism:ViewModelLocator.AutoWireViewModel="True">
-    <DockPanel LastChildFill="True">
-        <views:CriteriaView MaxHeight="128" DockPanel.Dock="Top" />
-        <views:NavigatorView Width="96" DockPanel.Dock="Right" />
-        <views:StudyView Margin="0,8,8,0" />
+    <DockPanel>
+        <views:CriteriaView DockPanel.Dock="Top" />
+        <views:StudyView DockPanel.Dock="Top" />
+        <views:NavigatorView DockPanel.Dock="Bottom"  />
     </DockPanel>
 </UserControl>
