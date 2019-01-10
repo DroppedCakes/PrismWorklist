@@ -49,9 +49,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModels\CriteriaViewModel.cs" />
-    <Compile Include="ViewModels\NavigatorViewModel.cs" />
-    <Compile Include="ViewModels\StudyViewModel.cs" />
+    <Compile Include="Helpers\StudyLoader.cs" />
     <Compile Include="ViewModels\WorkSpaceViewModel.cs" />
     <Compile Include="Views\CriteriaView.xaml.cs">
       <DependentUpon>CriteriaView.xaml</DependentUpon>
@@ -90,7 +88,13 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="NLog">
+      <Version>4.5.11</Version>
+    </PackageReference>
     <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
+    <PackageReference Include="ReactiveProperty">
+      <Version>5.3.2</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\CriteriaView.xaml">
@@ -109,6 +113,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismWorkList.infrastructure\PrismWorkList.Infrastructure.csproj">
+      <Project>{81E7F409-4722-4670-A9D6-43550A943D9F}</Project>
+      <Name>PrismWorkList.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

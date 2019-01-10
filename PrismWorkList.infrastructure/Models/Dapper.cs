@@ -11,7 +11,7 @@ namespace PrismWorkList.Infrastructure.Models
 {
    public class Dapper
     {
-        public IEnumerable<OrderPatientView> FetchWorkList()
+        public IEnumerable<StudyOrder> FetchWorkList(DateTime? since,DateTime? until)
         {
             var settings = ConfigurationManager.ConnectionStrings["PGTraining"];
             var factory = System.Data.Common.DbProviderFactories.GetFactory(settings.ProviderName);
@@ -20,11 +20,12 @@ namespace PrismWorkList.Infrastructure.Models
                 connection.ConnectionString = settings.ConnectionString;
                 connection.Open();
 
-                var retv = connection.Find<OrderPatientView>(statement => statement
+                var workList= connection.Find<StudyOrder>(statement => statement
                                   .Where($"{nameof(OrderPatientView.ExaminationDate)}=@examDate")
-                                  .WithParameters(new { examDate = "2018-10-28" }));
+                                  .WithParameters(new { StudyDateSince = "2018-10-18" })
+                                  .WithParameters(new { StudyDateUntil = "2018-10-18" }));
 
-                return retv;
+                return workList;
             }
         }
     }

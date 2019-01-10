@@ -11,6 +11,6 @@
     <DockPanel>
         <views:CriteriaView DockPanel.Dock="Top" />
         <views:StudyView DockPanel.Dock="Top" />
-        <views:NavigatorView DockPanel.Dock="Bottom"  />
+        <views:NavigatorView DockPanel.Dock="Bottom" />
     </DockPanel>
 </UserControl>

@@ -21,6 +21,11 @@ namespace PrismWorkList.Login.ViewModels
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
+        /// コンストラクタでインジェクション
+        /// </summary>
+        private IRegionManager RegionManager { get; set;}
+
+        /// <summary>
         /// 
         /// </summary>
         private string _userId;
@@ -45,12 +50,29 @@ namespace PrismWorkList.Login.ViewModels
             set { this.SetProperty(ref this._password, value); }
         }
 
-    #region PasswordChanged
+        /// <summary>
+        /// デザイン用コンストラクタ
+        /// </summary>
+        public LoginViewModel()
+        {
+        }
 
-    /// <summary>
-    ///
-    /// </summary>
-    public DelegateCommand<PasswordBox> PasswordChangedCommand { get; }
+        /// <summary>
+        /// 本番用コンストラクタ
+        /// </summary>
+        public LoginViewModel(IRegionManager regionManager)
+        {
+            this.RegionManager = regionManager;
+            this.LoginCommand = this.CreateLoginCommand();
+            this.PasswordChangedCommand = this.CreatePasswordChangedCommand();
+        }
+
+        #region PasswordChanged
+
+        /// <summary>
+        ///
+        /// </summary>
+        public DelegateCommand<PasswordBox> PasswordChangedCommand { get; }
 
         /// <summary>
         ///
@@ -111,8 +133,7 @@ namespace PrismWorkList.Login.ViewModels
                 if (RisUser.IsPasswordValid(password))
                 {
                     //　ワークリスト画面に遷移
-                    var regionManager = CommonServiceLocator.ServiceLocator.Current.GetInstance<IRegionManager>();
-                    regionManager.RequestNavigate("ContentRegion", nameof(WorkSpaceView));
+                    RegionManager.RequestNavigate("ContentRegion", nameof(WorkSpaceView));
                 }
                 else
                 {
@@ -144,14 +165,5 @@ namespace PrismWorkList.Login.ViewModels
                 
         #endregion 終了
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public LoginViewModel()
-        {
-            this.LoginCommand = this.CreateLoginCommand();
-            this.PasswordChangedCommand = this.CreatePasswordChangedCommand();
-        }
     }
 }
