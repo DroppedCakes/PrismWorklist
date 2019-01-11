@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\StudyLoader.cs" />
+    <Compile Include="ViewModels\StudyViewModel.cs" />
+    <Compile Include="ViewModels\ViewStudiesViewModel.cs" />
     <Compile Include="ViewModels\WorkSpaceViewModel.cs" />
     <Compile Include="Views\CriteriaView.xaml.cs">
       <DependentUpon>CriteriaView.xaml</DependentUpon>
@@ -57,8 +59,8 @@
     <Compile Include="Views\NavigatorView.xaml.cs">
       <DependentUpon>NavigatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\StudyView.xaml.cs">
-      <DependentUpon>StudyView.xaml</DependentUpon>
+    <Compile Include="Views\ViewStudies.xaml.cs">
+      <DependentUpon>ViewStudies.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WorkSpaceView.xaml.cs">
       <DependentUpon>WorkSpaceView.xaml</DependentUpon>
@@ -88,6 +90,12 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MaterialDesignColors">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="MaterialDesignThemes.MahApps">
+      <Version>0.0.12</Version>
+    </PackageReference>
     <PackageReference Include="NLog">
       <Version>4.5.11</Version>
     </PackageReference>
@@ -107,7 +115,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\StudyView.xaml">
+    <Page Include="Views\ViewStudies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

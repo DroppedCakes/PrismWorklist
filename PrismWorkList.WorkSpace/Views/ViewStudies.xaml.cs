@@ -3,11 +3,11 @@
 namespace PrismWorkList.WorkSpace.Views
 {
     /// <summary>
-    /// Interaction logic for StudyView
+    /// Interaction logic for ViewStudies
     /// </summary>
-    public partial class StudyView : UserControl
+    public partial class ViewStudies : UserControl
     {
-        public StudyView()
+        public ViewStudies()
         {
             InitializeComponent();
         }

@@ -10,7 +10,7 @@
     prism:ViewModelLocator.AutoWireViewModel="True">
     <DockPanel>
         <views:CriteriaView DockPanel.Dock="Top" />
-        <views:StudyView DockPanel.Dock="Top" />
+        <views:ViewStudies DockPanel.Dock="Top" />
         <views:NavigatorView DockPanel.Dock="Bottom" />
     </DockPanel>
 </UserControl>

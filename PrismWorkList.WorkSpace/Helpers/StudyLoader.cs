@@ -1,4 +1,5 @@
 ﻿using PrismWorkList.Infrastructure.Models;
+using PrismWorkList.WorkSpace.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace PrismWorkList.WorkSpace.Helpers
 {
     class StudyLoader
     {
-      public IEnumerable<StudyOrder> FetchWorkList()
+      public IEnumerable<StudyViewModel> FetchWorkList()
         {
             var dp = new Dapper();
 
@@ -17,7 +18,7 @@ namespace PrismWorkList.WorkSpace.Helpers
 
             foreach (StudyOrder study in studies)
             {
-                yield return study;
+                yield return StudyViewModel.Create(study);
             }
         }
     }
