@@ -7,6 +7,7 @@ using PrismWorkList.Login;
 using Prism.Regions;
 using PrismWorkList.Login.Views;
 using PrismWorkList.WorkSpace;
+using PrismWorkList.Infrastructure.Models;
 
 namespace PrismWorkList
 {
@@ -29,7 +30,7 @@ namespace PrismWorkList
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterInstance(new RisUser());
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

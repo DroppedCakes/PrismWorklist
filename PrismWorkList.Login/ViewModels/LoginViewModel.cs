@@ -10,6 +10,11 @@ using PrismWorkList.Infrastructure;
 using PrismWorkList.Infrastructure.Models;
 using PrismWorkList.WorkSpace.Views;
 using Prism.Ioc;
+using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
+using System.Reactive.Linq;
+using System.ComponentModel.DataAnnotations;
+using PrismWorkList.Login.Helper;
 
 namespace PrismWorkList.Login.ViewModels
 {
@@ -23,32 +28,10 @@ namespace PrismWorkList.Login.ViewModels
         /// <summary>
         /// コンストラクタでインジェクション
         /// </summary>
-        private IRegionManager RegionManager { get; set;}
+        private IRegionManager RegionManager { get; set; } = null;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private string _userId;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string UserId
-        {
-            get { return this._userId; }
-            set { this.SetProperty(ref this._userId, value); }
-        }
-
-        private string _password;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Password
-        {
-            get { return this._password; }
-            set { this.SetProperty(ref this._password, value); }
-        }
+        // Model
+        private RisUser RisUser { get; set; } = null;
 
         /// <summary>
         /// デザイン用コンストラクタ
@@ -60,101 +43,80 @@ namespace PrismWorkList.Login.ViewModels
         /// <summary>
         /// 本番用コンストラクタ
         /// </summary>
-        public LoginViewModel(IRegionManager regionManager)
+        public LoginViewModel(IRegionManager regionManager,RisUser risUser)
         {
             this.RegionManager = regionManager;
-            this.LoginCommand = this.CreateLoginCommand();
-            this.PasswordChangedCommand = this.CreatePasswordChangedCommand();
+
+            this.RisUser = risUser;
+
+            // M->VMの接続
+            this.UserId = this.RisUser.ObserveProperty(x => x.UserId)
+                .ToReactiveProperty()
+                .SetValidateAttribute(() => this.UserId);
+
+            // VM->Mの接続
+            this.UserId
+                // エラーが無い時
+                .Where(_ => !this.UserId.HasErrors)
+                // モデルに設定
+                .Subscribe(x => this.RisUser.UserId = x);
+
+            // パスワードM->VM
+            this.Password = this.RisUser.ObserveProperty(x => x.Password)
+                .ToReactiveProperty()
+                .SetValidateAttribute(() => this.Password);
+            
+            // パスワードVM->M
+            this.Password
+                .Where(x => !this.Password.HasErrors)
+                .Subscribe(x => this.RisUser.Password = x);
+
+            // 入力項目に不備が無ければ押せるコマンド
+            this.LoginCommand = new[]
+            {
+                this.UserId.Select(_=>!this.UserId.HasErrors),
+                this.Password.Select(_=>!this.Password.HasErrors)
+            }
+            .CombineLatestValuesAreAllTrue()
+            .ToReactiveCommand();
+
+            // ログイン認証を試す
+            this.LoginCommand.Subscribe(_ => RisUser.TryLogin());
+
+            // ログイン認証が通ればTrue
+            this.CanLogin = this.RisUser.ObserveProperty(x => x.CanLogin)
+                .ToReadOnlyReactiveProperty();
+
+            // CanLogin値が変われば、画面遷移する
+            this.CanLogin.Subscribe(_=>Navigation());
         }
-
-        #region PasswordChanged
-
-        /// <summary>
-        ///
-        /// </summary>
-        public DelegateCommand<PasswordBox> PasswordChangedCommand { get; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <returns></returns>
-        private DelegateCommand<PasswordBox> CreatePasswordChangedCommand()
-        {
-            return new DelegateCommand<PasswordBox>(
-                this.ExecutePasswordChanged
-            );
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="passwordBox"></param>
-        private void ExecutePasswordChanged(PasswordBox passwordBox)
-        {
-            this.Password = passwordBox.Password;
-        }
-
-        #endregion PasswordChanged
 
         #region ログイン動作
+        [Required(ErrorMessage = "UserIDを入力してください")]
+        public ReactiveProperty<string> UserId { get; private set; }
+
+        [Required(ErrorMessage = "Passwordを入力してください")]
+        public ReactiveProperty<string> Password { get; private set; }
+
+        public ReadOnlyReactiveProperty<bool> CanLogin { get; private set; }
 
         /// <summary>
-        ///
+        /// 認証コマンド
         /// </summary>
-        public DelegateCommand<PasswordBox> LoginCommand { get; }
+        public ReactiveCommand LoginCommand { get; private set;}
 
         /// <summary>
-        ///
+        /// 画面遷移コマンド
         /// </summary>
-        /// <returns></returns>
-        private DelegateCommand<PasswordBox> CreateLoginCommand()
+        public ReactiveCommand NavigationCommand { get; private set; }
+
+        /// <summary>
+        /// 画面遷移メソッド
+        /// </summary>
+        private void Navigation()
         {
-            return new DelegateCommand<PasswordBox>(
-                this.ExecuteLogin,
-                this.CanExecuteLogin
-            )
-            .ObservesProperty(() => this.UserId)
-            .ObservesProperty(() => this.Password);
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        private void ExecuteLogin(PasswordBox passwordBox)
-        {
-            var user_id = this.UserId;
-            var password = this.Password;
-
-            //  ここでパスワードをクリア
-            passwordBox.Password = "";
-
-            try
-            {
-                if (RisUser.IsPasswordValid(password))
-                {
-                    //　ワークリスト画面に遷移
-                    RegionManager.RequestNavigate("ContentRegion", nameof(WorkSpaceView));
-                }
-                else
-                {
-                    //　ダイアログ出す
-                }
-
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex);
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <returns></returns>
-        private bool CanExecuteLogin(PasswordBox passwordBox)
-        {
-            return !string.IsNullOrWhiteSpace(this.UserId)
-                && !string.IsNullOrWhiteSpace(passwordBox.Password);
+                //　ワークリスト画面に遷移
+                RegionManager.RequestNavigate("ContentRegion", nameof(WorkSpaceView));
         }
 
         #endregion ログイン動作
