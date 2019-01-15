@@ -51,19 +51,21 @@
   <ItemGroup>
     <Compile Include="Helpers\StudyLoader.cs" />
     <Compile Include="ViewModels\StudyViewModel.cs" />
+    <Compile Include="ViewModels\ViewCriteriaViewModel.cs" />
+    <Compile Include="ViewModels\ViewNavigatorViewModel.cs" />
     <Compile Include="ViewModels\ViewStudiesViewModel.cs" />
-    <Compile Include="ViewModels\WorkSpaceViewModel.cs" />
-    <Compile Include="Views\CriteriaView.xaml.cs">
-      <DependentUpon>CriteriaView.xaml</DependentUpon>
+    <Compile Include="ViewModels\ViewWorkSpaceViewModel.cs" />
+    <Compile Include="Views\ViewCriteria.xaml.cs">
+      <DependentUpon>ViewCriteria.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NavigatorView.xaml.cs">
-      <DependentUpon>NavigatorView.xaml</DependentUpon>
+    <Compile Include="Views\ViewNavigator.xaml.cs">
+      <DependentUpon>ViewNavigator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewStudies.xaml.cs">
       <DependentUpon>ViewStudies.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WorkSpaceView.xaml.cs">
-      <DependentUpon>WorkSpaceView.xaml</DependentUpon>
+    <Compile Include="Views\ViewWorkSpace.xaml.cs">
+      <DependentUpon>ViewWorkSpace.xaml</DependentUpon>
     </Compile>
     <Compile Include="WorkSpaceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -107,11 +109,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\CriteriaView.xaml">
+    <Page Include="Views\ViewCriteria.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NavigatorView.xaml">
+    <Page Include="Views\ViewNavigator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,7 +121,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WorkSpaceView.xaml">
+    <Page Include="Views\ViewWorkSpace.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

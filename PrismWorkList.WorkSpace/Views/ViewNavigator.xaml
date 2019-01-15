@@ -1,0 +1,39 @@
+﻿<UserControl
+    x:Class="PrismWorkList.WorkSpace.Views.ViewNavigator"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+
+        </Grid.ColumnDefinitions>
+        <Button
+            Grid.Column="0"
+            Command="{Binding ShowOrderCommand}"
+            Content="検査詳細表示" />
+        <Button
+            Grid.Column="1"
+            Command="{Binding ShowPatientCommand}"
+            Content="患者情報編集" />
+        <Button
+            Grid.Column="2"
+            Command="{Binding OrderCancelCommand}"
+            Content="検査取消" />
+        <Button
+            Grid.Column="3"
+            Command="{Binding ShowConfigCommand}"
+            Content="設定" />
+        <Button
+            x:Name="QuitButton"
+            Grid.Column="4"
+            Content="終了" />
+    </Grid>
+</UserControl>
+
