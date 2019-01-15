@@ -25,7 +25,7 @@
             Command="{Binding SearchCriteriaClearCommand}"
             Content="クリア" />
         <StackPanel Grid.Column="2">
-            <Button Command="{Binding Path=StudiesReloadCommand}" Content="検索" />
+            <Button Command="{Binding StudiesReloadCommand}" Content="検索" />
         </StackPanel>
     </Grid>
 

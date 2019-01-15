@@ -10,11 +10,11 @@ namespace PrismWorkList.WorkSpace.Helpers
 {
     class StudyLoader
     {
-      public IEnumerable<StudyViewModel> FetchWorkList()
+        public IEnumerable<StudyViewModel> FetchWorkList()
         {
             var dp = new Dapper();
 
-            var studies = dp.FetchWorkList(null,null);
+            var studies = dp.FetchWorkList(null, null);
 
             foreach (StudyOrder study in studies)
             {

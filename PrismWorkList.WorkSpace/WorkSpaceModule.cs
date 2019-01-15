@@ -17,7 +17,6 @@ namespace PrismWorkList.WorkSpace
         {
             containerRegistry.RegisterSingleton<ViewWorkSpaceViewModel>();
             containerRegistry.RegisterForNavigation<ViewWorkSpace>();
-            containerRegistry.RegisterSingleton<ViewStudiesViewModel>();
             containerRegistry.RegisterForNavigation<ViewStudies>();
             containerRegistry.RegisterForNavigation<ViewCriteria>();
             containerRegistry.RegisterForNavigation<ViewNavigator>();

@@ -51,9 +51,6 @@
   <ItemGroup>
     <Compile Include="Helpers\StudyLoader.cs" />
     <Compile Include="ViewModels\StudyViewModel.cs" />
-    <Compile Include="ViewModels\ViewCriteriaViewModel.cs" />
-    <Compile Include="ViewModels\ViewNavigatorViewModel.cs" />
-    <Compile Include="ViewModels\ViewStudiesViewModel.cs" />
     <Compile Include="ViewModels\ViewWorkSpaceViewModel.cs" />
     <Compile Include="Views\ViewCriteria.xaml.cs">
       <DependentUpon>ViewCriteria.xaml</DependentUpon>

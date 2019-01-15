@@ -20,12 +20,12 @@ namespace PrismWorkList.Infrastructure.Models
                 connection.ConnectionString = settings.ConnectionString;
                 connection.Open();
 
-                var workList= connection.Find<StudyOrder>(statement => statement
+                var studies= connection.Find<StudyOrder>(statement => statement
                                   .Where($"{nameof(OrderPatientView.ExaminationDate)}=@examDate")
                                   .WithParameters(new { StudyDateSince = "2018-10-18" })
                                   .WithParameters(new { StudyDateUntil = "2018-10-18" }));
 
-                return workList;
+                return studies;
             }
         }
     }
