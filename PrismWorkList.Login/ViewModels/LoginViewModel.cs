@@ -115,8 +115,8 @@ namespace PrismWorkList.Login.ViewModels
         /// </summary>
         private void Navigation()
         {
-                //　ワークリスト画面に遷移
-                RegionManager.RequestNavigate("ContentRegion", nameof(ViewWorkSpace));
+            //　ワークリスト画面に遷移
+            RegionManager.RequestNavigate("ContentRegion", nameof(ViewWorkSpace));
         }
 
         #endregion ログイン動作
