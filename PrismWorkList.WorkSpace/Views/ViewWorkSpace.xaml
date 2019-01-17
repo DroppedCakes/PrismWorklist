@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="PrismWorkList.WorkSpace.Views.ViewWorkSpace"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:prism="http://prismlibrary.com/"
-             xmlns:views="clr-namespace:PrismWorkList.WorkSpace.Views"
-             prism:ViewModelLocator.AutoWireViewModel="True">
+﻿<UserControl
+    x:Class="PrismWorkList.WorkSpace.Views.ViewWorkSpace"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:views="clr-namespace:PrismWorkList.WorkSpace.Views"
+    prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <DockPanel>
             <views:ViewCriteria DockPanel.Dock="Top" />

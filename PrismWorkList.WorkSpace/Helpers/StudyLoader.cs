@@ -8,18 +8,26 @@ using System.Threading.Tasks;
 
 namespace PrismWorkList.WorkSpace.Helpers
 {
-    class StudyLoader
+   public class StudyLoader
     {
-        public IEnumerable<StudyViewModel> FetchWorkList()
+        public void FetchWorkList()
         {
-            var dp = new Dapper();
+            //        var connectionString = "Data Source=FUJIOKA-PC\SQLEXPRESS;Initial Catalog=PGTraining;Integrated Security=True;";
+            //        var factory = System.Data.Common.DbProviderFactories.GetFactory("System.Data.SqlClient");
+            //        using (var connection = factory.CreateConnection())
+            //        {
+            //            connection.ConnectionString = settings.ConnectionString;
+            //            connection.Open();
 
-            var studies = dp.FetchWorkList(null, null);
+            //            var studies = connection.Find<StudyOrder>(statement => statement
+            //                               .Where($"{nameof(OrderPatientView.ExaminationDate)}=@examDate")
+            //                               .WithParameters(new { StudyDateSince = "2018-10-18" })
+            //                               .WithParameters(new { StudyDateUntil = "2018-10-18" }));
 
-            foreach (StudyOrder study in studies)
-            {
-                yield return StudyViewModel.Create(study);
-            }
+            //            foreach (StudyOrder study in studies)
+            //        {
+            //            yield return StudyViewModel.Create(study);
+            //        }
         }
     }
 }

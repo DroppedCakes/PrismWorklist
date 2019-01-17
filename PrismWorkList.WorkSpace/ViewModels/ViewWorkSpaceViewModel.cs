@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,7 +30,7 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// <summary>
         /// 検査一覧
         /// </summary>
-        public ObservableCollection<StudyViewModel> Studies { get; private set; }
+        public ObservableCollection<StudyViewModel> Studies { get; private set; } = new ObservableCollection<StudyViewModel>();
 
         public ReactiveProperty<DateTime> StudyDateSince { get; set; } = new ReactiveProperty<DateTime>(DateTime.Now);
 
@@ -55,19 +56,19 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// </summary>
         private async void StudiesReload()
         {
-            this.Studies.Clear();
+            //this.Studies.Clear();
 
-            await Task.Factory.StartNew(
-                () =>
-                {
-                    var loader = new StudyLoader();
+            //await Task.Factory.StartNew(
+            //    () =>
+            //    {
+            //        var loader = new StudyLoader();
 
-                    foreach (var study in loader.FetchWorkList())
-                    {
-                        this._syncer.Post(this.AddStudy, study);
-                    }
-                }
-                );
+            //        foreach (var study in loader.FetchWorkList())
+            //        {
+            //            this._syncer.Post(this.AddStudy, study);
+            //        }
+            //    }
+            //    );
         }
 
         /// <summary>
@@ -92,7 +93,7 @@ namespace PrismWorkList.WorkSpace.ViewModels
         public ViewWorkSpaceViewModel()
         {
             // クリア
-            this.SearchCriteriaClearCommand.Subscribe(_ => this.CriteriaClear());
+            this.SearchCriteriaClearCommand.Subscribe( _=>this.CriteriaClear());
 
             this.StudiesReloadCommand.Subscribe(async _ => await Task.Run(() =>
             {

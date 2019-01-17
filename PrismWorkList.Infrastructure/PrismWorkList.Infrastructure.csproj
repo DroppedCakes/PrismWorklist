@@ -110,7 +110,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Dapper.cs" />
     <Compile Include="Models\ModelGeneratorConfig.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

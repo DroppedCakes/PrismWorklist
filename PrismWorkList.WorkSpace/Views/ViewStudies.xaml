@@ -48,23 +48,23 @@
                 Width="120"
                 Binding="{Binding Numeric}"
                 EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
-                Header="漢字氏名"/>
+                Header="漢字氏名" />
             <materialDesign:MaterialDataGridTextColumn
                 Binding="{Binding Description}"
                 EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
-                Header="カナ氏名"/>
+                Header="カナ氏名" />
             <materialDesign:MaterialDataGridTextColumn
                 Binding="{Binding Description}"
                 EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
-                Header="生年月日"/>
+                Header="生年月日" />
             <materialDesign:MaterialDataGridTextColumn
                 Binding="{Binding Description}"
                 EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
-                Header="性別"/>
+                Header="性別" />
             <materialDesign:MaterialDataGridTextColumn
                 Binding="{Binding Description}"
                 EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
-                Header="モダリティ"/>
+                Header="モダリティ" />
         </DataGrid.Columns>
     </DataGrid>
 
