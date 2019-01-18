@@ -5,7 +5,7 @@
 This is the configuration file for GenericModelGenerator.tt
 */
 	// Settings
-	ConfigPath = @""; //Looks in current project for web.config or app.config by default. You can override it to point to a different config file.
+	ConfigPath = @"..\..\PrismWorkList\App.config"; //Looks in current project for web.config or app.config by default. You can override it to point to a different config file.
     ConnectionStringName = "PGTraining"; // Uses the last connection string in the config if not specified
     Namespace = "PrismWorkList.Infrastructure.Models";
 	ClassPrefix = "";

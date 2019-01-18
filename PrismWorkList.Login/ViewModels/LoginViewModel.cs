@@ -28,10 +28,10 @@ namespace PrismWorkList.Login.ViewModels
         /// <summary>
         /// コンストラクタでインジェクション
         /// </summary>
-        private IRegionManager RegionManager { get; set; } = null;
+        private IRegionManager RegionManager;
 
         // Model
-        private RisUser RisUser { get; set; } = null;
+        private RisUser RisUser;
 
         /// <summary>
         /// デザイン用コンストラクタ
@@ -43,11 +43,11 @@ namespace PrismWorkList.Login.ViewModels
         /// <summary>
         /// 本番用コンストラクタ
         /// </summary>
-        public LoginViewModel(IRegionManager regionManager,RisUser risUser)
+        public LoginViewModel(IRegionManager regionManager,ITransactionContext transactionContext)
         {
             this.RegionManager = regionManager;
 
-            this.RisUser = risUser;
+            this.RisUser = new RisUser(transactionContext);
 
             // M->VMの接続
             this.UserId = this.RisUser.ObserveProperty(x => x.UserId)

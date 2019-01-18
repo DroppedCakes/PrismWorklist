@@ -16,6 +16,16 @@ namespace PrismWorkList.Infrastructure.Models
         private const int SALT_SIZE = 24;
 
         /// <summary>
+        /// TransactionContext
+        /// </summary>
+        private ITransactionContext _transactionContext;
+  
+        /// <summary>
+        /// UserDao
+        /// </summary>
+        private readonly UserDao _userDao;
+
+        /// <summary>
         /// ユーザーID
         /// </summary>
         private string userId;
@@ -46,15 +56,28 @@ namespace PrismWorkList.Infrastructure.Models
         }
 
         /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public RisUser(ITransactionContext transactionContext)
+        {
+            this._transactionContext = transactionContext;
+            this._userDao = new UserDao(this._transactionContext);
+        }
+
+        /// <summary>
         /// 未実装
         /// </summary>
         public void TryLogin()
         {
-            //var salt = GenerateSalt();
+            this._transactionContext.Connection.Open();
 
-            //var passwordHash = GeneratePasswordHash(Password, salt);
+            var userDao = new UserDao(this._transactionContext);
 
-            if (UserId == "alice")
+            var obteinedUser =userDao.FindByLoginId(this.userId);
+
+            var hash_pass = GeneratePasswordHash(Password, obteinedUser.Salt);
+
+            if (this.Password==hash_pass)
             {
                 this.CanLogin = true;
             }
@@ -64,32 +87,44 @@ namespace PrismWorkList.Infrastructure.Models
                 this.CanLogin = false;
             }
         }
+
+        /// <summary>
+        /// 乱数からソルトを作成
+        /// </summary>
+        /// <returns></returns>
+        public string GenerateSalt()
+        {
+            var rng = new RNGCryptoServiceProvider();
+
+            var buff = new byte[SALT_SIZE];
+
+            rng.GetBytes(buff);
+
+            return BitConverter.ToString(buff);
+        }
+
+        /// <summary>
+        /// パスワードをハッシュ化する
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="salt"></param>
+        /// <returns></returns>
+        public string GeneratePasswordHash(string password, string salt)
+        {
+            var concatPass = String.Concat(password, salt);
+
+            var encoder = new UTF8Encoding();
+
+            var buff = encoder.GetBytes(concatPass);
+
+            var csp = new SHA256CryptoServiceProvider();
+
+            var retv = csp.ComputeHash(buff);
+
+            return BitConverter.ToString(retv);
+        }
     }
 }
 
-        //public string GenerateSalt()
-        //{
-        //    var rng = new RNGCryptoServiceProvider();
-
-        //    var buff = new byte[SALT_SIZE];
-
-        //    rng.GetBytes(buff);
-
-        //    return BitConverter.ToString(buff);
-        //}
-        
-        //public string GeneratePasswordHash(string password,string salt)
-        //{
-        //    var concatPass = String.Concat(password, salt);
-
-        //    var encoder = new UTF8Encoding();
-
-        //    var buff = encoder.GetBytes(concatPass);
-
-        //    var csp = new SHA256CryptoServiceProvider();
-
-        //    var retv = csp.ComputeHash(buff);
-
-        //    return BitConverter.ToString(retv);
-        //} 
+    
 

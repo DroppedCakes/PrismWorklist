@@ -26,7 +26,7 @@ namespace PrismWorkList.Infrastructure
         }
 
         public virtual void Update(ExaminationOrder examinationOrder)
-        => _transactionContext.Connection.Update(examinationOrder);
+            => _transactionContext.Connection.Update(examinationOrder);
 
         public virtual void Insert(ExaminationOrder examinationOrder)
             => _transactionContext.Connection.Insert(examinationOrder);

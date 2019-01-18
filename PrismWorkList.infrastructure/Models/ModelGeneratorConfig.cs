@@ -6,7 +6,7 @@
 // 
 //     Connection String Name: `PGTraining`
 //     Provider:               `System.Data.SqlClient`
-//     Connection String:      `Data Source=FUJIOKA-PC\SQLEXPRESS;Initial Catalog=PGTraining;Integrated Security=True;`
+//     Connection String:      `Data Source=localhost\SQLEXPRESS;Initial Catalog=PGTraining;Integrated Security=True;`
 //     Include Views:          `True`
 
 namespace PrismWorkList.Infrastructure.Models

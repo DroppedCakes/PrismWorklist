@@ -8,6 +8,10 @@ using Prism.Regions;
 using PrismWorkList.Login.Views;
 using PrismWorkList.WorkSpace;
 using PrismWorkList.Infrastructure.Models;
+using PrismWorkList.Infrastructure;
+using System.Data;
+using System.Configuration;
+using System.Data.Common;
 
 namespace PrismWorkList
 {
@@ -30,13 +34,25 @@ namespace PrismWorkList
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance(new RisUser());
+            TransactionContext.SetOpenConnection(OpenConnection);
+            containerRegistry.RegisterInstance(new TransactionContext());
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<LoginModule>(InitializationMode.WhenAvailable);
             moduleCatalog.AddModule<WorkSpaceModule>();
+        }
+
+        private static IDbConnection OpenConnection()
+        {
+            var settings = ConfigurationManager.ConnectionStrings["PGTraining"];
+            var factory = DbProviderFactories.GetFactory(settings.ProviderName);
+            var connection = factory.CreateConnection();
+            connection.ConnectionString = settings.ConnectionString;
+            connection.Open();
+
+            return connection;
         }
     }
 }
