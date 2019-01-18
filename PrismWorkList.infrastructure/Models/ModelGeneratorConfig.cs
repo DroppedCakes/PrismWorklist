@@ -17,6 +17,24 @@ namespace PrismWorkList.Infrastructure.Models
 	using System.Collections.Generic;
 
     /// <summary>
+    /// A class which represents the ExaminationOrders table.
+    /// </summary>
+	[Table("ExaminationOrders")]
+	public partial class ExaminationOrder
+	{
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+	    public virtual int ID { get; set; }
+	    public virtual string OrderNumber { get; set; }
+	    public virtual DateTime ExaminationDate { get; set; }
+	    public virtual string ProcessingDivision { get; set; }
+	    public virtual int InfoID { get; set; }
+	    public virtual string ExaminationTypeCode { get; set; }
+	    public virtual string ExaminationTypeName { get; set; }
+	    public virtual string Comment { get; set; }
+	}
+
+    /// <summary>
     /// A class which represents the PatientInfomation table.
     /// </summary>
 	[Table("PatientInfomation")]
@@ -30,6 +48,20 @@ namespace PrismWorkList.Infrastructure.Models
 	    public virtual string KanaName { get; set; }
 	    public virtual DateTime BirthDate { get; set; }
 	    public virtual string Gender { get; set; }
+	}
+
+    /// <summary>
+    /// A class which represents the ShotItems table.
+    /// </summary>
+	[Table("ShotItems")]
+	public partial class ShotItem
+	{
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+	    public virtual int ID { get; set; }
+	    public virtual int OrderID { get; set; }
+	    public virtual string ShotItemCode { get; set; }
+	    public virtual string ShotItemName { get; set; }
 	}
 
     /// <summary>
@@ -52,42 +84,11 @@ namespace PrismWorkList.Infrastructure.Models
 	}
 
     /// <summary>
-    /// A class which represents the ShotItems table.
+    /// A class which represents the OrderPatientView view.
     /// </summary>
-	[Table("ShotItems")]
-	public partial class ShotItem
+	[Table("OrderPatientView")]
+	public partial class OrderPatientView
 	{
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-	    public virtual int ID { get; set; }
-	    public virtual int OrderID { get; set; }
-	    public virtual string ShotItemCode { get; set; }
-	    public virtual string ShotItemName { get; set; }
-	}
-
-    /// <summary>
-    /// A class which represents the sysdiagrams table.
-    /// </summary>
-	[Table("sysdiagrams")]
-	public partial class sysdiagram
-	{
-	    public virtual string name { get; set; }
-	    public virtual int principal_id { get; set; }
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-	    public virtual int diagram_id { get; set; }
-	    public virtual int? version { get; set; }
-	    public virtual byte[] definition { get; set; }
-	}
-
-    /// <summary>
-    /// A class which represents the ExaminationOrders table.
-    /// </summary>
-	[Table("ExaminationOrders")]
-	public partial class ExaminationOrder
-	{
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	    public virtual int ID { get; set; }
 	    public virtual string OrderNumber { get; set; }
 	    public virtual DateTime ExaminationDate { get; set; }
@@ -96,13 +97,18 @@ namespace PrismWorkList.Infrastructure.Models
 	    public virtual string ExaminationTypeCode { get; set; }
 	    public virtual string ExaminationTypeName { get; set; }
 	    public virtual string Comment { get; set; }
+	    public virtual string PatientID { get; set; }
+	    public virtual string KanjiName { get; set; }
+	    public virtual string KanaName { get; set; }
+	    public virtual DateTime BirthDate { get; set; }
+	    public virtual string Gender { get; set; }
 	}
 
     /// <summary>
-    /// A class which represents the OrderPatientView view.
+    /// A class which represents the View_1 view.
     /// </summary>
-	[Table("OrderPatientView")]
-	public partial class OrderPatientView
+	[Table("View_1")]
+	public partial class View1
 	{
 	    public virtual int ID { get; set; }
 	    public virtual string OrderNumber { get; set; }

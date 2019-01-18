@@ -121,11 +121,5 @@ namespace PrismWorkList.Login.ViewModels
 
         #endregion ログイン動作
 
-        #region 終了
-
-        public DelegateCommand<Button> ExitCommand { get; private set; }
-                
-        #endregion 終了
-
     }
 }
