@@ -54,8 +54,18 @@ namespace PrismWorkList.Infrastructure.Models
 
             //var passwordHash = GeneratePasswordHash(Password, salt);
 
-            this.CanLogin = true;
+            if (UserId == "alice")
+            {
+                this.CanLogin = true;
+            }
+            else
+            {
+                this.Password = "";
+                this.CanLogin = false;
+            }
         }
+    }
+}
 
         //public string GenerateSalt()
         //{
@@ -82,5 +92,4 @@ namespace PrismWorkList.Infrastructure.Models
 
         //    return BitConverter.ToString(retv);
         //} 
-    }
-}
+

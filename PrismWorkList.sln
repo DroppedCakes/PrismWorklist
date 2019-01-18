@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.Infrastructur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.WorkSpace", "PrismWorkList.WorkSpace\PrismWorkList.WorkSpace.csproj", "{01AD8EF2-A413-40A7-BB09-BBABD04CCA1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.Settings", "PrismWorkList.Settings\PrismWorkList.Settings.csproj", "{DCF92279-1299-4714-8ADB-1C02067EF69A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{01AD8EF2-A413-40A7-BB09-BBABD04CCA1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01AD8EF2-A413-40A7-BB09-BBABD04CCA1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01AD8EF2-A413-40A7-BB09-BBABD04CCA1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCF92279-1299-4714-8ADB-1C02067EF69A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF92279-1299-4714-8ADB-1C02067EF69A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF92279-1299-4714-8ADB-1C02067EF69A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCF92279-1299-4714-8ADB-1C02067EF69A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

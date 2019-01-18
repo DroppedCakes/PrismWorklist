@@ -6,10 +6,12 @@ using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace PrismWorkList.WorkSpace.ViewModels
 {
@@ -31,6 +33,11 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// 検査一覧
         /// </summary>
         public ObservableCollection<StudyViewModel> Studies { get; private set; } = new ObservableCollection<StudyViewModel>();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICollectionView StudiesView { get; }
 
         public ReactiveProperty<DateTime> StudyDateSince { get; set; } = new ReactiveProperty<DateTime>(DateTime.Now);
 
@@ -54,21 +61,21 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// <summary>
         /// 検査を再読み込み
         /// </summary>
-        private async void StudiesReload()
+        private void StudiesReload()
         {
             //this.Studies.Clear();
 
             //await Task.Factory.StartNew(
             //    () =>
             //    {
-            //        var loader = new StudyLoader();
+            var loader = new StudyLoader();
 
-            //        foreach (var study in loader.FetchWorkList())
-            //        {
-            //            this._syncer.Post(this.AddStudy, study);
-            //        }
-            //    }
-            //    );
+            foreach (var study in loader.FetchWorkList(DateTime.Now, DateTime.Now))
+            {
+                this._syncer.Post(this.AddStudy, study);
+            }
+            //}
+            //);
         }
 
         /// <summary>
@@ -92,6 +99,8 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// </summary>
         public ViewWorkSpaceViewModel()
         {
+
+            this.StudiesView = CollectionViewSource.GetDefaultView(this.Studies);
             // クリア
             this.SearchCriteriaClearCommand.Subscribe( _=>this.CriteriaClear());
 
@@ -100,7 +109,6 @@ namespace PrismWorkList.WorkSpace.ViewModels
                 this.StudiesReload();
             }));
         }
-
 
     }
 }

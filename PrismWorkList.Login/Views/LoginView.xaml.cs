@@ -17,10 +17,5 @@ namespace PrismWorkList.Login.Views
         {
             Application.Current.MainWindow.Close();
         }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

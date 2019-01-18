@@ -28,8 +28,7 @@
             Grid.Row="0"
             Grid.Column="2"
             MaxLength="32"
-            Text="{Binding Path=UserId.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            TextChanged="TextBox_TextChanged" />
+            Text="{Binding Path=UserId.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
         <TextBlock Grid.Row="2" Grid.Column="0">パスワード</TextBlock>
         <TextBox
