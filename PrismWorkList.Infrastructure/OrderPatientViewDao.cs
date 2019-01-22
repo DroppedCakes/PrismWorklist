@@ -23,10 +23,12 @@ namespace PrismWorkList.Infrastructure
 
         public IEnumerable<OrderPatientView> FetchOrders(string since, string until)
             => _dbConnection.Find<OrderPatientView>(statement => statement
-              .Where($"{nameof(OrderPatientView.ExaminationDate):C} = @DateSince ")
+              .Where($"{nameof(OrderPatientView.ExaminationDate):C} >= @DateSince AND @DateUntil>={nameof(OrderPatientView.ExaminationDate):C}")
+            .OrderBy($"{nameof(OrderPatientView.ExaminationDate):C}ASC")
               .WithParameters(new
               {
-                  DateSince = since
+                  DateSince = since,
+                  DateUntil = until
               })
             );
         
