@@ -110,8 +110,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITransaction.cs" />
-    <Compile Include="ITransactionContext.cs" />
     <Compile Include="Models\ModelGeneratorConfig.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -129,7 +127,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="StudyDao.cs" />
-    <Compile Include="TransactionContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
