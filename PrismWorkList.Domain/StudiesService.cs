@@ -24,7 +24,7 @@ namespace PrismWorkList.Domain
             return retv;
         }
 
-        public IList<OrderPatientView> FetchOrderPatients(DateTime since, DateTime until)
+        public IList<OrderPatientView> FetchOrderPatients(string since, string until)
         {
             var retv = new List<OrderPatientView>();
             foreach (var order in this._orderPatientViewDao.FetchOrders(since,until))

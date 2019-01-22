@@ -80,14 +80,14 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// <summary>
         /// 検査を再読み込み
         /// </summary>
-        private async void StudiesReload()
+        private async void StudiesReload(DateTime since,DateTime until)
         {
             this.StudiesClear();
 
             await Task.Factory.StartNew(
                 () =>
                 {
-                    foreach (var study in _studiesService.FetchOrderPatients())
+                    foreach (var study in _studiesService.FetchOrderPatients(since.Date.ToString(),until.Date.ToString()))
                     {
                         this._syncer.Post(this.AddStudy,study);
                     }
@@ -137,7 +137,7 @@ namespace PrismWorkList.WorkSpace.ViewModels
             this.SearchCriteriaClearCommand.Subscribe( _=>this.CriteriaClear());
 
             // 再読み込みコマンド
-            this.StudiesReloadCommand.Subscribe(_ => this.StudiesReload());
+            this.StudiesReloadCommand.Subscribe(_ => this.StudiesReload(StudyDateSince.Value,StudyDateUntil.Value));
         }
 
     }

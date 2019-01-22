@@ -10,5 +10,6 @@ namespace PrismWorkList.Domain
    public interface IStudiesService
     {
         IList<OrderPatientView> FetchOrderPatients();
+        IList<OrderPatientView> FetchOrderPatients(string since,string until);
     }
 }

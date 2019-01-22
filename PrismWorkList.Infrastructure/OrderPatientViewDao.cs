@@ -21,16 +21,15 @@ namespace PrismWorkList.Infrastructure
         public IEnumerable<OrderPatientView> FetchOrders()
             => _dbConnection.Find<OrderPatientView>();
 
-        public IEnumerable<OrderPatientView> FetchOrders(DateTime since,DateTime until)
-        {
-            var retv=_dbConnection.Find<OrderPatientView>(statement => statement
-            .Where($"@since=<{nameof(OrderPatientView.ExaminationDate)} AND{nameof(OrderPatientView.ExaminationDate)}=<@until")
-            .WithParameters(new { since, until })
+        public IEnumerable<OrderPatientView> FetchOrders(string since, string until)
+            => _dbConnection.Find<OrderPatientView>(statement => statement
+              .Where($"{nameof(OrderPatientView.ExaminationDate):C} = @DateSince ")
+              .WithParameters(new
+              {
+                  DateSince = since
+              })
             );
-            return retv;
-        }
-
-
+        
         public virtual void Update(OrderPatientView examinationOrder)
             => _dbConnection.Update(examinationOrder);
 
