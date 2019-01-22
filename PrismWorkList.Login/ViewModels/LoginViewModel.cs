@@ -15,6 +15,7 @@ using Reactive.Bindings.Extensions;
 using System.Reactive.Linq;
 using System.ComponentModel.DataAnnotations;
 using PrismWorkList.Login.Helper;
+using System.Data;
 
 namespace PrismWorkList.Login.ViewModels
 {
@@ -43,11 +44,11 @@ namespace PrismWorkList.Login.ViewModels
         /// <summary>
         /// 本番用コンストラクタ
         /// </summary>
-        public LoginViewModel(IRegionManager regionManager,ITransactionContext transactionContext)
+        public LoginViewModel(IRegionManager regionManager,IDbConnection dbConnection)
         {
             this.RegionManager = regionManager;
 
-            this.RisUser = new RisUser(transactionContext);
+            this.RisUser = new RisUser(dbConnection);
 
             // M->VMの接続
             this.UserId = this.RisUser.ObserveProperty(x => x.UserId)

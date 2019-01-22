@@ -1,6 +1,7 @@
 ﻿using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,15 +17,10 @@ namespace PrismWorkList.Infrastructure.Models
         private const int SALT_SIZE = 24;
 
         /// <summary>
-        /// TransactionContext
+        /// 
         /// </summary>
-        private ITransactionContext _transactionContext;
-  
-        /// <summary>
-        /// UserDao
-        /// </summary>
-        private readonly UserDao _userDao;
-
+        private readonly IDbConnection _dbConnection;
+ 
         /// <summary>
         /// ユーザーID
         /// </summary>
@@ -58,10 +54,9 @@ namespace PrismWorkList.Infrastructure.Models
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public RisUser(ITransactionContext transactionContext)
+         public RisUser(IDbConnection dbConnection)
         {
-            this._transactionContext = transactionContext;
-            this._userDao = new UserDao(this._transactionContext);
+            this._dbConnection = dbConnection;
         }
 
         /// <summary>
@@ -69,22 +64,34 @@ namespace PrismWorkList.Infrastructure.Models
         /// </summary>
         public void TryLogin()
         {
-            this._transactionContext.Connection.Open();
+            try { 
+            this._dbConnection.Open();
 
-            var userDao = new UserDao(this._transactionContext);
+            var userDao = new UserDao(this._dbConnection);
 
-            var obteinedUser =userDao.FindByLoginId(this.userId);
+            var obteinedUser = userDao.FindByLoginId(this.userId);
 
-            var hash_pass = GeneratePasswordHash(Password, obteinedUser.Salt);
+             if (obteinedUser == null)
+                {
+                    this.Password = "";
+                    return;
+                }
 
-            if (this.Password==hash_pass)
+                var hash_pass = GeneratePasswordHash(Password, obteinedUser.Salt);
+
+            if (obteinedUser.Password ==hash_pass)
             {
                 this.CanLogin = true;
             }
             else
             {
                 this.Password = "";
-                this.CanLogin = false;
+            }
+
+            }
+            finally
+            {
+                this._dbConnection.Close();
             }
         }
 

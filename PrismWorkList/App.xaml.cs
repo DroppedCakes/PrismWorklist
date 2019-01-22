@@ -34,8 +34,7 @@ namespace PrismWorkList
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            TransactionContext.SetOpenConnection(OpenConnection);
-            containerRegistry.RegisterInstance(new TransactionContext());
+            containerRegistry.RegisterInstance(OpenConnection());
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -50,7 +49,6 @@ namespace PrismWorkList
             var factory = DbProviderFactories.GetFactory(settings.ProviderName);
             var connection = factory.CreateConnection();
             connection.ConnectionString = settings.ConnectionString;
-            connection.Open();
 
             return connection;
         }
