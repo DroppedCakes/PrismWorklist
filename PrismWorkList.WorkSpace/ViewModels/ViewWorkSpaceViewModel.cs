@@ -1,16 +1,16 @@
 ﻿using NLog;
-using Prism.Commands;
 using Prism.Mvvm;
-using PrismWorkList.WorkSpace.Helpers;
+using Prism.Regions;
+using PrismWorkList.Domain;
 using Reactive.Bindings;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using PrismWorkList.Infrastructure.Models;
+using System.ComponentModel;
 using System.Windows.Data;
 
 namespace PrismWorkList.WorkSpace.ViewModels
@@ -22,32 +22,30 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// </summary>
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        private readonly IRegionManager _regionManager;
+        private readonly IStudiesService _studiesService;
+
+        private readonly IMapper _mapper;
+
         /// <summary>
         /// 一定ポイントで同期させる
         /// </summary>
         private readonly SynchronizationContext _syncer = SynchronizationContext.Current;
 
-        #region 検査一覧
-
-        /// <summary>
-        /// 検査一覧
-        /// </summary>
-        public ObservableCollection<StudyViewModel> Studies { get; private set; } = new ObservableCollection<StudyViewModel>();
+        #region 検索条件
 
         /// <summary>
         /// 
         /// </summary>
-        public ICollectionView StudiesView { get; }
-
         public ReactiveProperty<DateTime> StudyDateSince { get; set; } = new ReactiveProperty<DateTime>(DateTime.Now);
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ReactiveProperty<DateTime> StudyDateUntil { get; set; } = new ReactiveProperty<DateTime>(DateTime.Now);
 
         // 検索条件クリアコマンド
         public ReactiveCommand SearchCriteriaClearCommand { get; } = new ReactiveCommand();
-
-        // ワークリスト更新コマンド
-        public ReactiveCommand StudiesReloadCommand { get; } = new ReactiveCommand();
 
         /// <summary>
         /// 検索条件クリア
@@ -57,57 +55,89 @@ namespace PrismWorkList.WorkSpace.ViewModels
             this.StudyDateSince.Value = DateTime.Now;
             this.StudyDateUntil.Value = DateTime.Now;
         }
+        #endregion 検索条件
+
+        #region 検査再読み込み
+
+        /// <summary>
+        /// 検査一覧
+        /// </summary>
+        public ObservableCollection<StudyViewModel> Studies { get; } = new ObservableCollection<StudyViewModel>();
+
+        public ICollectionView StudiesView { get; }
+
+        // ワークリスト更新コマンド
+        public ReactiveCommand StudiesReloadCommand { get; } = new ReactiveCommand();
+
+        /// <summary>
+        /// 検査をクリアする
+        /// </summary>
+        private void StudiesClear()
+        {
+            this.Studies.Clear();
+        }
 
         /// <summary>
         /// 検査を再読み込み
         /// </summary>
-        private void StudiesReload()
+        private async void StudiesReload()
         {
-            //this.Studies.Clear();
+            this.StudiesClear();
 
-            //await Task.Factory.StartNew(
-            //    () =>
-            //    {
-            var loader = new StudyLoader();
-
-            foreach (var study in loader.FetchWorkList(DateTime.Now, DateTime.Now))
-            {
-                this._syncer.Post(this.AddStudy, study);
-            }
-            //}
-            //);
+            await Task.Factory.StartNew(
+                () =>
+                {
+                    foreach (var study in _studiesService.FetchOrderPatients())
+                    {
+                        this._syncer.Post(this.AddStudy,study);
+                    }
+                }
+                );
         }
 
         /// <summary>
-        /// 検査を追加
+        ///
         /// </summary>
         /// <param name="study"></param>
         private void AddStudy(object study)
         {
-            this.AddStudy((StudyViewModel)study);
+            this.AddStudy(_mapper.Map<StudyViewModel>(study));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="study"></param>
         private void AddStudy(StudyViewModel study)
         {
             this.Studies.Add(study);
         }
-                
-        #endregion 検査一覧
+
+        #endregion 検査再読み込み
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public ViewWorkSpaceViewModel()
+        public ViewWorkSpaceViewModel(IRegionManager regionManager, IStudiesService studiesService)
         {
+            // DI
+            this._regionManager = regionManager;
+            this._studiesService = studiesService;
 
             this.StudiesView = CollectionViewSource.GetDefaultView(this.Studies);
-            // クリア
+
+            // Mapするモデルの設定
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<OrderPatientView, StudyViewModel>();
+            });
+            // Mapperを作成
+           this._mapper = config.CreateMapper();
+
+            // 検索条件クリアコマンド
             this.SearchCriteriaClearCommand.Subscribe( _=>this.CriteriaClear());
 
-            this.StudiesReloadCommand.Subscribe(async _ => await Task.Run(() =>
-            {
-                this.StudiesReload();
-            }));
+            // 再読み込みコマンド
+            this.StudiesReloadCommand.Subscribe(_ => this.StudiesReload());
         }
 
     }

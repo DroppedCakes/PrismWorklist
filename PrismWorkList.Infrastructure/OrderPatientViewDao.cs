@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PrismWorkList.Infrastructure
 {
-    class OrderPatientViewDao
+    public class OrderPatientViewDao
     {
         private readonly IDbConnection _dbConnection;
 
@@ -18,8 +18,18 @@ namespace PrismWorkList.Infrastructure
             this._dbConnection = dbConnection;
         }
 
-        public IEnumerable<OrderPatientView> FetchOrders(string orderNumber)
+        public IEnumerable<OrderPatientView> FetchOrders()
             => _dbConnection.Find<OrderPatientView>();
+
+        public IEnumerable<OrderPatientView> FetchOrders(DateTime since,DateTime until)
+        {
+            var retv=_dbConnection.Find<OrderPatientView>(statement => statement
+            .Where($"@since=<{nameof(OrderPatientView.ExaminationDate)} AND{nameof(OrderPatientView.ExaminationDate)}=<@until")
+            .WithParameters(new { since, until })
+            );
+            return retv;
+        }
+
 
         public virtual void Update(OrderPatientView examinationOrder)
             => _dbConnection.Update(examinationOrder);
