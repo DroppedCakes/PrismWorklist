@@ -118,6 +118,7 @@
     <Compile Include="Models\RisUser.cs" />
     <Compile Include="Models\StudyOrder.cs" />
     <Compile Include="Models\PatientInfo.cs" />
+    <Compile Include="OrderPatientViewDao.cs" />
     <Compile Include="UserDao.cs" />
     <Compile Include="PatientDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

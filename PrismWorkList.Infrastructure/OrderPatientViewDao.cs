@@ -18,7 +18,7 @@ namespace PrismWorkList.Infrastructure
             this._dbConnection = dbConnection;
         }
 
-        public IEnumerable<OrderPatientView> FindByOrderNumber(string orderNumber)
+        public IEnumerable<OrderPatientView> FetchOrders(string orderNumber)
             => _dbConnection.Find<OrderPatientView>();
 
         public virtual void Update(OrderPatientView examinationOrder)
