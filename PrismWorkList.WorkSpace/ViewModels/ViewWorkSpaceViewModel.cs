@@ -48,6 +48,11 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// <summary>
         /// 
         /// </summary>
+        public ReactiveProperty<string> PatientID { get; set; } = new ReactiveProperty<string>();
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ReactiveProperty<DateTime> StudyDateSince { get; set; } = new ReactiveProperty<DateTime>(DateTime.Now);
 
         /// <summary>
@@ -67,6 +72,7 @@ namespace PrismWorkList.WorkSpace.ViewModels
         {
             this.StudyDateSince.Value = DateTime.Now;
             this.StudyDateUntil.Value = DateTime.Now;
+            this.PatientID.Value = "";
         }
         #endregion 検索条件
 
