@@ -22,9 +22,20 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// </summary>
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly IRegionManager _regionManager;
+
+        /// <summary>
+        /// 検査取得サービス
+        /// </summary>
         private readonly IStudiesService _studiesService;
 
+        /// <summary>
+        /// AutoMapping
+        /// ViewOrderPatient→StudyVMに詰め替え
+        /// </summary>
         private readonly IMapper _mapper;
 
         /// <summary>
@@ -44,7 +55,9 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// </summary>
         public ReactiveProperty<DateTime> StudyDateUntil { get; set; } = new ReactiveProperty<DateTime>(DateTime.Now);
 
-        // 検索条件クリアコマンド
+        /// <summary>
+        /// 検索条件クリアコマンド
+        /// </summary>
         public ReactiveCommand SearchCriteriaClearCommand { get; } = new ReactiveCommand();
 
         /// <summary>
@@ -57,13 +70,16 @@ namespace PrismWorkList.WorkSpace.ViewModels
         }
         #endregion 検索条件
 
-        #region 検査再読み込み
+        #region 検査読み込み
 
         /// <summary>
         /// 検査一覧
         /// </summary>
         public ObservableCollection<StudyViewModel> Studies { get; } = new ObservableCollection<StudyViewModel>();
 
+        /// <summary>
+        /// フィルターやソート機能を提供
+        /// </summary>
         public ICollectionView StudiesView { get; }
 
         // ワークリスト更新コマンド
@@ -113,7 +129,15 @@ namespace PrismWorkList.WorkSpace.ViewModels
             this.Studies.Add(study);
         }
 
-        #endregion 検査再読み込み
+        #endregion 検査読み込み
+
+        /// <summary>
+        /// デザイン用コンストラクタ
+        /// </summary>
+        public ViewWorkSpaceViewModel()
+        {
+
+        }
 
         /// <summary>
         /// コンストラクタ
