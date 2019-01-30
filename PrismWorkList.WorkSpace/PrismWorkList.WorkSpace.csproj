@@ -49,17 +49,19 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModels\CriteriaViewModel.cs" />
-    <Compile Include="ViewModels\NavigatorViewModel.cs" />
-    <Compile Include="ViewModels\WorkSpaceViewModel.cs" />
-    <Compile Include="Views\CriteriaView.xaml.cs">
-      <DependentUpon>CriteriaView.xaml</DependentUpon>
+    <Compile Include="ViewModels\StudyViewModel.cs" />
+    <Compile Include="ViewModels\ViewWorkSpaceViewModel.cs" />
+    <Compile Include="Views\ViewCriteria.xaml.cs">
+      <DependentUpon>ViewCriteria.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NavigatorView.xaml.cs">
-      <DependentUpon>NavigatorView.xaml</DependentUpon>
+    <Compile Include="Views\ViewNavigator.xaml.cs">
+      <DependentUpon>ViewNavigator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WorkSpaceView.xaml.cs">
-      <DependentUpon>WorkSpaceView.xaml</DependentUpon>
+    <Compile Include="Views\ViewStudies.xaml.cs">
+      <DependentUpon>ViewStudies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewWorkSpace.xaml.cs">
+      <DependentUpon>ViewWorkSpace.xaml</DependentUpon>
     </Compile>
     <Compile Include="WorkSpaceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -86,21 +88,58 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
+    <PackageReference Include="AutoMapper">
+      <Version>8.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Dapper.FastCrud">
+      <Version>2.5.0.39</Version>
+    </PackageReference>
+    <PackageReference Include="MaterialDesignColors">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="MaterialDesignThemes.MahApps">
+      <Version>0.0.12</Version>
+    </PackageReference>
+    <PackageReference Include="NLog">
+      <Version>4.5.11</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Wpf">
+      <Version>7.1.0.431</Version>
+    </PackageReference>
+    <PackageReference Include="ReactiveProperty">
+      <Version>5.3.2</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\CriteriaView.xaml">
+    <Page Include="Views\ViewCriteria.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NavigatorView.xaml">
+    <Page Include="Views\ViewNavigator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WorkSpaceView.xaml">
+    <Page Include="Views\ViewStudies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ViewWorkSpace.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismWorkList.Domain\PrismWorkList.Domain.csproj">
+      <Project>{04FE6F9F-6C92-44C0-AED6-31612E046C57}</Project>
+      <Name>PrismWorkList.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PrismWorkList.infrastructure\PrismWorkList.Infrastructure.csproj">
+      <Project>{81E7F409-4722-4670-A9D6-43550A943D9F}</Project>
+      <Name>PrismWorkList.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

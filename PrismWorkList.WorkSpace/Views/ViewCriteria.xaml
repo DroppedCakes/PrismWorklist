@@ -1,0 +1,40 @@
+﻿<UserControl
+    x:Class="PrismWorkList.WorkSpace.Views.ViewCriteria"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:views="clr-namespace:PrismWorkList.WorkSpace.Views"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Horizontal">
+            <DatePicker SelectedDate="{Binding Path=StudyDateSince.Value}" SelectedDateFormat="Long" />
+            <TextBlock Text=" ～ " />
+            <DatePicker SelectedDate="{Binding Path=StudyDateUntil.Value}" SelectedDateFormat="Long" />
+        </StackPanel>
+
+        <Button
+            Grid.Column="1"
+            Command="{Binding SearchCriteriaClearCommand}"
+            Content="クリア" />
+        <Button
+            Grid.Column="2"
+            Command="{Binding StudiesReloadCommand}"
+            Content="検索" />
+        <TextBox
+            Grid.Column="3"
+            materialDesign:HintAssist.Hint="患者ID"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Text="{Binding Path=PatientID.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    </Grid>
+
+</UserControl>
+

@@ -126,11 +126,22 @@
       <Version>4.5.11</Version>
     </PackageReference>
     <PackageReference Include="Prism.Unity" Version="7.1.0.431&#xD;" />
+    <PackageReference Include="Prism.Wpf">
+      <Version>7.1.0.431</Version>
+    </PackageReference>
     <PackageReference Include="ReactiveProperty">
       <Version>5.3.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PrismWorkList.Domain\PrismWorkList.Domain.csproj">
+      <Project>{04FE6F9F-6C92-44C0-AED6-31612E046C57}</Project>
+      <Name>PrismWorkList.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PrismWorkList.infrastructure\PrismWorkList.Infrastructure.csproj">
+      <Project>{81E7F409-4722-4670-A9D6-43550A943D9F}</Project>
+      <Name>PrismWorkList.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PrismWorkList.Login\PrismWorkList.Login.csproj">
       <Project>{fcb11ace-a771-4642-aa3c-40b3bf1a7793}</Project>
       <Name>PrismWorkList.Login</Name>

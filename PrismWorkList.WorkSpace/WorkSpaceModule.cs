@@ -15,8 +15,11 @@ namespace PrismWorkList.WorkSpace
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<WorkSpaceViewModel>();
-            containerRegistry.RegisterForNavigation<WorkSpaceView>();
+            containerRegistry.RegisterSingleton<ViewWorkSpaceViewModel>();
+            containerRegistry.RegisterForNavigation<ViewWorkSpace>();
+            containerRegistry.RegisterForNavigation<ViewStudies>();
+            containerRegistry.RegisterForNavigation<ViewCriteria>();
+            containerRegistry.RegisterForNavigation<ViewNavigator>();
         }
     }
 }

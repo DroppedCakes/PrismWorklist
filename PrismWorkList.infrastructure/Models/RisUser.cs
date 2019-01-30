@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PrismWorkList.Infrastructure.Models
 {
-    public class RisUser
+    public class RisUser : BindableBase
     {
         /// <summary>
         /// Saltサイズ
@@ -15,27 +17,89 @@ namespace PrismWorkList.Infrastructure.Models
         private const int SALT_SIZE = 24;
 
         /// <summary>
-        /// UserId
+        /// 
         /// </summary>
-        public string UserId { get; set; }
+        private readonly IDbConnection _dbConnection;
+ 
+        /// <summary>
+        /// ユーザーID
+        /// </summary>
+        private string userId;
+        public string UserId
+        {
+            get { return userId; }
+            set { SetProperty(ref userId, value); }
+        }
+
+        /// <summary>
+        /// パスワード
+        /// </summary>
+        private string password;
+        public string Password
+        {
+            get { return password; }
+            set { SetProperty(ref password, value); }
+        }
+
+        /// <summary>
+        /// 認証結果
+        /// </summary>
+        private bool canLogin;
+        public bool CanLogin
+        {
+            get { return canLogin; }
+            set { SetProperty(ref canLogin, value); }
+        }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+         public RisUser(IDbConnection dbConnection)
+        {
+            this._dbConnection = dbConnection;
+        }
 
         /// <summary>
         /// 未実装
         /// </summary>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public static bool IsPasswordValid(string password)
+        public void TryLogin()
         {
-            var salt = GenerateSalt();
+            try { 
+            this._dbConnection.Open();
 
-            var passwordHash = GeneratePasswordHash(password, salt);
+            var userDao = new UserDao(this._dbConnection);
 
-            var retv = true;
+            var obteinedUser = userDao.FindByLoginId(this.userId);
 
-            return retv;
+             if (obteinedUser == null)
+                {
+                    this.Password = "";
+                    return;
+                }
+
+                var hash_pass = GeneratePasswordHash(Password, obteinedUser.Salt);
+
+            if (obteinedUser.Password ==hash_pass)
+            {
+                this.CanLogin = true;
+            }
+            else
+            {
+                this.Password = "";
+            }
+
+            }
+            finally
+            {
+                this._dbConnection.Close();
+            }
         }
 
-        public static string GenerateSalt()
+        /// <summary>
+        /// 乱数からソルトを作成
+        /// </summary>
+        /// <returns></returns>
+        public string GenerateSalt()
         {
             var rng = new RNGCryptoServiceProvider();
 
@@ -45,8 +109,14 @@ namespace PrismWorkList.Infrastructure.Models
 
             return BitConverter.ToString(buff);
         }
-        
-        public  static string GeneratePasswordHash(string password,string salt)
+
+        /// <summary>
+        /// パスワードをハッシュ化する
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="salt"></param>
+        /// <returns></returns>
+        public string GeneratePasswordHash(string password, string salt)
         {
             var concatPass = String.Concat(password, salt);
 
@@ -59,6 +129,9 @@ namespace PrismWorkList.Infrastructure.Models
             var retv = csp.ComputeHash(buff);
 
             return BitConverter.ToString(retv);
-        } 
+        }
     }
 }
+
+    
+

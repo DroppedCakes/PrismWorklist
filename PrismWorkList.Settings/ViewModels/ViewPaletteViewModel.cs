@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PrismWorkList.WorkSpace.ViewModels
+namespace PrismWorkList.Settings.ViewModels
 {
-    public class CriteriaViewModel : BindableBase
+    public class ViewPaletteViewModel : BindableBase
     {
-        public CriteriaViewModel()
+        public ViewPaletteViewModel()
         {
 
         }

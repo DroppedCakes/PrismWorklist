@@ -3,11 +3,11 @@
 namespace PrismWorkList.WorkSpace.Views
 {
     /// <summary>
-    /// Interaction logic for Navigator
+    /// Interaction logic for ViewNavigator
     /// </summary>
-    public partial class NavigatorView : UserControl
+    public partial class ViewNavigator : UserControl
     {
-        public NavigatorView()
+        public ViewNavigator()
         {
             InitializeComponent();
         }
