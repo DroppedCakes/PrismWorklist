@@ -1,21 +1,16 @@
-﻿using Prism.Commands;
+﻿using NLog;
 using Prism.Mvvm;
 using Prism.Regions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using NLog;
-using System.Windows.Controls;
 using PrismWorkList.Infrastructure;
 using PrismWorkList.Infrastructure.Models;
 using PrismWorkList.WorkSpace.Views;
-using Prism.Ioc;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
-using System.Reactive.Linq;
+using System;
 using System.ComponentModel.DataAnnotations;
-using PrismWorkList.Login.Helper;
 using System.Data;
+using System.Linq;
+using System.Reactive.Linq;
 
 namespace PrismWorkList.Login.ViewModels
 {

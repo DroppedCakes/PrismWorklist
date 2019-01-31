@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Dapper.FastCrud;
+using PrismWorkList.Infrastructure.Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper.FastCrud;
-using PrismWorkList.Infrastructure.Models;
 
 namespace PrismWorkList.Infrastructure
 {

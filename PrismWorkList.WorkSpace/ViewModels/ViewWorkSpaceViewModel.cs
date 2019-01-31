@@ -1,22 +1,22 @@
-﻿using NLog;
+﻿using AutoMapper;
+using MaterialDesignThemes.Wpf;
+using NLog;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+using PrismWorkList.Infrastructure.Models;
+using PrismWorkList.Service;
 using Reactive.Bindings;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
-using PrismWorkList.Infrastructure.Models;
-using System.ComponentModel;
 using System.Windows.Data;
-using PrismWorkList.Service;
-using MaterialDesignThemes.Wpf;
 using System.Windows.Input;
-using Prism.Commands;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace PrismWorkList.WorkSpace.ViewModels
 {

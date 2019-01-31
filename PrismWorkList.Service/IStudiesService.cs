@@ -1,13 +1,9 @@
-﻿using System;
+﻿using PrismWorkList.Infrastructure.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PrismWorkList.Infrastructure.Models;
 
 namespace PrismWorkList.Service
 {
-   public interface IStudiesService
+    public interface IStudiesService
     {
         IList<Gender> GetGenders();
         IList<OrderPatientView> FetchOrderPatientsCurrentDay(string currentDate);

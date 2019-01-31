@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using PrismWorkList.Infrastructure;
 using PrismWorkList.Infrastructure.Models;
-using PrismWorkList.Infrastructure;
+using System.Collections.Generic;
 
 namespace PrismWorkList.Service
 {

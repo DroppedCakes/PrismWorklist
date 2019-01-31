@@ -1,8 +1,7 @@
-﻿using PrismWorkList.WorkSpace.Views;
-using Prism.Ioc;
+﻿using Prism.Ioc;
 using Prism.Modularity;
-using Prism.Regions;
 using PrismWorkList.WorkSpace.ViewModels;
+using PrismWorkList.WorkSpace.Views;
 
 namespace PrismWorkList.WorkSpace
 {

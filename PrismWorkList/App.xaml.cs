@@ -1,19 +1,16 @@
-﻿using PrismWorkList.Views;
-using Prism.Ioc;
+﻿using Prism.Ioc;
 using Prism.Modularity;
-using System.Windows;
-using PrismWorkList.ViewModels;
-using PrismWorkList.Login;
 using Prism.Regions;
-using PrismWorkList.Login.Views;
-using PrismWorkList.WorkSpace;
-using PrismWorkList.Infrastructure.Models;
 using PrismWorkList.Infrastructure;
-using System.Data;
-using System.Configuration;
-using System.Data.Common;
+using PrismWorkList.Login;
+using PrismWorkList.Login.Views;
 using PrismWorkList.Service;
-using System;
+using PrismWorkList.Views;
+using PrismWorkList.WorkSpace;
+using System.Configuration;
+using System.Data;
+using System.Data.Common;
+using System.Windows;
 
 namespace PrismWorkList
 {

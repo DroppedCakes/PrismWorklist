@@ -1,7 +1,7 @@
-﻿using System.Data;
-using System.Linq;
-using Dapper.FastCrud;
+﻿using Dapper.FastCrud;
 using PrismWorkList.Infrastructure.Models;
+using System.Data;
+using System.Linq;
 
 namespace PrismWorkList.Infrastructure
 {
