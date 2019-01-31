@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,24 +11,21 @@ namespace PrismWorkList.Infrastructure
 {
     public class PatientDao
     {
-        private readonly ITransactionContext _transactionContext;
-
-        public PatientDao(ITransactionContext transactionContext)
+        public PatientDao()
         {
-            _transactionContext = transactionContext;
         }
 
-        public virtual PatientInfo FindByPatientID(string patientID)
+        public virtual PatientInfo FindByPatientID(IDbConnection db,string patientID)
         {
-            return _transactionContext.Connection.Find<PatientInfo>(statement =>
+            return db.Find<PatientInfo>(statement =>
             statement.Where($"{nameof(PatientInfo.PatientID)}='{patientID}'")
             ).SingleOrDefault();
         }
 
-        public virtual void Update(PatientInfo patient)
-            => _transactionContext.Connection.Update(patient);
+        public virtual void Update(IDbConnection db,PatientInfo patient)
+            => db.Update(patient);
 
-        public virtual void Insert(PatientInfo patient)
-            => _transactionContext.Connection.Insert(patient);
+        public virtual void Insert(IDbConnection db,PatientInfo patient)
+            => db.Insert(patient);
     }
 }

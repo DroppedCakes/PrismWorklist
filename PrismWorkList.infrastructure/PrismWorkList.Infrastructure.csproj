@@ -110,6 +110,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ITransaction.cs" />
+    <Compile Include="ITransactionContext.cs" />
     <Compile Include="Models\ModelGeneratorConfig.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -119,6 +121,7 @@
     <Compile Include="Models\StudyOrder.cs" />
     <Compile Include="Models\PatientInfo.cs" />
     <Compile Include="OrderPatientViewDao.cs" />
+    <Compile Include="TransactionContext.cs" />
     <Compile Include="UserDao.cs" />
     <Compile Include="PatientDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
