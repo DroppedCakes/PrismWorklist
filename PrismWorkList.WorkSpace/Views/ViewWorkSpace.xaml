@@ -37,7 +37,9 @@
             <views:ViewNavigator />
         </StackPanel>
         <views:ViewStudies Grid.Row="1" />
-        <material:Snackbar Background="{StaticResource AccentColorBrush}" MessageQueue="{Binding SnackBarMessageQueue}" />
+        <material:Snackbar
+            Grid.Row="4"
+            Background="{StaticResource AccentColorBrush}"
+            MessageQueue="{Binding SnackBarMessageQueue}" />
     </Grid>
-
 </UserControl>

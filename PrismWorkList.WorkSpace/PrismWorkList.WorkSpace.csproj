@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GenderType.cs" />
+    <Compile Include="Helpers\GenderConverter.cs" />
     <Compile Include="ViewModels\StudyViewModel.cs" />
     <Compile Include="ViewModels\ViewWorkSpaceViewModel.cs" />
     <Compile Include="Views\ViewCriteria.xaml.cs">
@@ -139,8 +140,6 @@
       <Name>PrismWorkList.Service</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

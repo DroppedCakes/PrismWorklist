@@ -77,6 +77,8 @@ namespace PrismWorkList.WorkSpace.ViewModels
                 .OrderBy(x=>x.Code);
 
             LoadStudies();
+
+            AddSnackBarMessage($"{DateTime.Now.Date.ToString("yyyyMMdd")}：ログインしました");
         }
 
         /// <summary>
@@ -205,7 +207,7 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public SnackbarMessageQueue SnackBarMessageQueue { get; private set; }
+        public SnackbarMessageQueue SnackBarMessageQueue { get; private set; } = new SnackbarMessageQueue();
 
         /// <summary>
         /// 
@@ -218,7 +220,7 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// <param name="value"></param>
         public void AddSnackBarMessage(string value)
         {
-            this.SnackBarMessageQueue.Enqueue($"{value}SnackBar from ViewModel Now = { DateTime.Now}");
+            this.SnackBarMessageQueue.Enqueue(value);
         }
 
         #endregion SnackBar
