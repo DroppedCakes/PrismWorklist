@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using PrismWorkList.Infrastructure.Models;
 
-namespace PrismWorkList.Domain
+namespace PrismWorkList.Service
 {
    public interface IStudiesService
     {
-        IList<OrderPatientView> FetchOrderPatients();
-        IList<OrderPatientView> FetchOrderPatients(string since,string until);
+        IList<OrderPatientView> FetchOrderPatientsCurrentDay(string currentDate);
+        IList<OrderPatientView> FetchOrderPatients(string since,string until);  
     }
 }

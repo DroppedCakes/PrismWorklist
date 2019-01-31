@@ -7,26 +7,26 @@ namespace PrismWorkList.Infrastructure
 {
     public class UserDao
     {
-        private readonly IDbConnection _dbConnection;
+        private readonly ITransactionContext _transactionContext;
 
-        public UserDao(IDbConnection dbConnection)
+        public UserDao(ITransactionContext transactionContext)
         {
-            this._dbConnection= dbConnection;
+            _transactionContext = transactionContext;
         }
 
         public virtual User FindByLoginId(string loginID)
         {
-            return _dbConnection.Find<User>(statement =>
+            return _transactionContext.Connection.Find<User>(statement =>
             statement
             .Where($"{nameof(User.UserID)}='{loginID}'")
             ).SingleOrDefault();
         }
 
         public virtual void Update(User user)
-            => _dbConnection.Update(user);
+            => _transactionContext.Connection.Update(user);
 
         public virtual void Insert(User user)
-            => _dbConnection.Insert(user);
+            => _transactionContext.Connection.Insert(user);
 
     }
 }

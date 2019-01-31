@@ -16,6 +16,7 @@
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="8" />
             <ColumnDefinition Width="192" />
         </Grid.ColumnDefinitions>
@@ -28,19 +29,30 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0">ユーザID</TextBlock>
-
+        <TextBlock Grid.Row="0" Grid.Column="1">ユーザID</TextBlock>
+        <materialDesign:PackIcon
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Kind="Account" />
         <TextBox
             Grid.Row="0"
-            Grid.Column="2"
+            Grid.Column="3"
             MaxLength="32"
             Text="{Binding Path=UserId.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
-        <TextBlock Grid.Row="2" Grid.Column="0">パスワード</TextBlock>
+        <materialDesign:PackIcon
+            Grid.Row="2"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Kind="Key" />
+        <TextBlock Grid.Row="2" Grid.Column="1">パスワード</TextBlock>
         <TextBox
             x:Name="PasswordBox"
             Grid.Row="2"
-            Grid.Column="2"
+            Grid.Column="3"
             Text="{Binding Path=Password.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
         <Grid Grid.Row="4" Grid.ColumnSpan="3">
@@ -52,6 +64,8 @@
 
             <Button
                 Grid.Column="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 Command="{Binding Path=LoginCommand}"
                 CommandParameter="{Binding ElementName=PasswordBox}">
                 ログオン
@@ -59,6 +73,8 @@
             <Button
                 x:Name="QuitButton"
                 Grid.Column="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 Click="QuitButton_Click">
                 終了
             </Button>

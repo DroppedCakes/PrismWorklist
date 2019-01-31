@@ -1,7 +1,6 @@
 ﻿using NLog;
 using Prism.Mvvm;
 using Prism.Regions;
-using PrismWorkList.Domain;
 using Reactive.Bindings;
 using System;
 using System.Collections.ObjectModel;
@@ -12,6 +11,7 @@ using AutoMapper;
 using PrismWorkList.Infrastructure.Models;
 using System.ComponentModel;
 using System.Windows.Data;
+using PrismWorkList.Service;
 
 namespace PrismWorkList.WorkSpace.ViewModels
 {
@@ -88,7 +88,14 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// </summary>
         public ICollectionView StudiesView { get; }
 
-        // ワークリスト更新コマンド
+        /// <summary>
+        /// 初回読込
+        /// </summary>
+        public ReactiveCommand StudiesLoad { get; } = new ReactiveCommand();
+
+        /// <summary>
+        ///  ワークリスト更新コマンド
+        /// </summary>
         public ReactiveCommand StudiesReloadCommand { get; } = new ReactiveCommand();
 
         /// <summary>
@@ -97,6 +104,22 @@ namespace PrismWorkList.WorkSpace.ViewModels
         private void StudiesClear()
         {
             this.Studies.Clear();
+        }
+
+        /// <summary>
+        /// 初期読込
+        /// </summary>
+        private async void CurrentDateSrudiesLoad(DateTime currentDate)
+        {
+            await Task.Factory.StartNew(
+            () =>
+            {
+                foreach (var study in _studiesService.FetchOrderPatientsCurrentDay(currentDate.Date.ToString()))
+                {
+                    this._syncer.Post(this.AddStudy, study);
+                }
+            }
+            );
         }
 
         /// <summary>
@@ -165,6 +188,9 @@ namespace PrismWorkList.WorkSpace.ViewModels
 
             // 検索条件クリアコマンド
             this.SearchCriteriaClearCommand.Subscribe( _=>this.CriteriaClear());
+
+            // 初期読込
+            //this.StudiesReloadCommand.Subscribe(_ => this.CurrentDateSrudiesLoad(DateTime.Now));
 
             // 再読み込みコマンド
             this.StudiesReloadCommand.Subscribe(_ => this.StudiesReload(StudyDateSince.Value,StudyDateUntil.Value));

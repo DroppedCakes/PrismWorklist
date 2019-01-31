@@ -3,11 +3,11 @@
 namespace PrismWorkList.Settings.Views
 {
     /// <summary>
-    /// Interaction logic for ViewPalette
+    /// Interaction logic for PalletSelector
     /// </summary>
-    public partial class ViewPalette : UserControl
+    public partial class PalletSelector : UserControl
     {
-        public ViewPalette()
+        public PalletSelector()
         {
             InitializeComponent();
         }

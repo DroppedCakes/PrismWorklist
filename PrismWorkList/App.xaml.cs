@@ -12,7 +12,8 @@ using PrismWorkList.Infrastructure;
 using System.Data;
 using System.Configuration;
 using System.Data.Common;
-using PrismWorkList.Domain;
+using PrismWorkList.Service;
+using System;
 
 namespace PrismWorkList
 {
@@ -35,9 +36,9 @@ namespace PrismWorkList
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance(OpenConnection());
-            containerRegistry.RegisterInstance(new OrderPatientViewDao(OpenConnection()));
-            containerRegistry.RegisterInstance<IStudiesService>(new StudiesService(Container.Resolve<OrderPatientViewDao>()));
+            TransactionContext.SetOpenConnection(OpenConnection);
+            containerRegistry.RegisterInstance(CreateTransactionContext());
+            containerRegistry.RegisterInstance<IStudiesService>(CreateIStudyService());
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -46,6 +47,11 @@ namespace PrismWorkList
             moduleCatalog.AddModule<WorkSpaceModule>();
         }
 
+        /// <summary>
+        /// App.configから
+        /// DBへのConnectionを作成する
+        /// </summary>
+        /// <returns></returns>
         private static IDbConnection OpenConnection()
         {
             var settings = ConfigurationManager.ConnectionStrings["PGTraining"];
@@ -54,6 +60,21 @@ namespace PrismWorkList
             connection.ConnectionString = settings.ConnectionString;
 
             return connection;
+        }
+
+        private static ITransactionContext _transactionContext;
+        private static ITransactionContext CreateTransactionContext()
+        {
+            if (_transactionContext ==null)
+            {
+                _transactionContext = new TransactionContext();
+            }
+            return _transactionContext;
+        }
+
+        private static IStudiesService CreateIStudyService()
+        {
+            return new StudiesService(CreateTransactionContext(),new OrderPatientViewDao());
         }
     }
 }

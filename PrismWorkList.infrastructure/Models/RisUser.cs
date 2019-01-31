@@ -19,7 +19,7 @@ namespace PrismWorkList.Infrastructure.Models
         /// <summary>
         /// 
         /// </summary>
-        private readonly IDbConnection _dbConnection;
+        private readonly ITransactionContext _transactionContext;
  
         /// <summary>
         /// ユーザーID
@@ -54,24 +54,26 @@ namespace PrismWorkList.Infrastructure.Models
         /// <summary>
         /// コンストラクタ
         /// </summary>
-         public RisUser(IDbConnection dbConnection)
+         public RisUser(ITransactionContext transactionContext)
         {
-            this._dbConnection = dbConnection;
+            _transactionContext = transactionContext;
         }
 
         /// <summary>
-        /// 未実装
+        ///
         /// </summary>
         public void TryLogin()
         {
-            try { 
-            this._dbConnection.Open();
+            using (var transaction = _transactionContext.Open())
+            {
+                var userDao = new UserDao(_transactionContext);
 
-            var userDao = new UserDao(this._dbConnection);
+                var obteinedUser = userDao.FindByLoginId(this.userId);
 
-            var obteinedUser = userDao.FindByLoginId(this.userId);
+                transaction.Complete();
 
-             if (obteinedUser == null)
+                // ユーザーが存在しなければreturn
+                if (obteinedUser == null)
                 {
                     this.Password = "";
                     return;
@@ -79,19 +81,15 @@ namespace PrismWorkList.Infrastructure.Models
 
                 var hash_pass = GeneratePasswordHash(Password, obteinedUser.Salt);
 
-            if (obteinedUser.Password ==hash_pass)
-            {
-                this.CanLogin = true;
-            }
-            else
-            {
-                this.Password = "";
-            }
-
-            }
-            finally
-            {
-                this._dbConnection.Close();
+                // ハッシュ化したパスワードがDBと一致するか
+                if (obteinedUser.Password == hash_pass)
+                {
+                    this.CanLogin = true;
+                }
+                else
+                {
+                    this.Password = "";
+                }
             }
         }
 

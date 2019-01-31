@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DCF92279-1299-4714-8ADB-1C02067EF69A}</ProjectGuid>
+    <ProjectGuid>{871D0581-8E19-4DC6-8B40-46FBCB6FCE50}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PrismWorkList.Settings</RootNamespace>
-    <AssemblyName>PrismWorkList.Settings</AssemblyName>
+    <RootNamespace>PrismWorkList.Service</RootNamespace>
+    <AssemblyName>PrismWorkList.Service</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,7 +49,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SettingsModule.cs" />
+    <Compile Include="AuthenticationService.cs" />
+    <Compile Include="IAuthenticationService.cs" />
+    <Compile Include="IStudiesService.cs" />
+    <Compile Include="ServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -63,10 +66,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="Views\Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="StudiesService.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -78,14 +78,13 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
+    <ProjectReference Include="..\PrismWorkList.infrastructure\PrismWorkList.Infrastructure.csproj">
+      <Project>{81E7F409-4722-4670-A9D6-43550A943D9F}</Project>
+      <Name>PrismWorkList.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Page Include="Views\Settings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

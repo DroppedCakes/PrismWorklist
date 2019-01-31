@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace PrismWorkList.Settings.ViewModels
 {
-    public class ViewPaletteViewModel : BindableBase
+    public class PalletSelectorViewModel : BindableBase
     {
-        public ViewPaletteViewModel()
+        public PalletSelectorViewModel()
         {
 
         }

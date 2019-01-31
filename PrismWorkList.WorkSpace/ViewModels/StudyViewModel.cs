@@ -1,12 +1,5 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Regions;
-using PrismWorkList.Domain;
-using PrismWorkList.Infrastructure.Models;
+﻿using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace PrismWorkList.WorkSpace.ViewModels
 {

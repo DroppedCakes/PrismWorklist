@@ -44,11 +44,11 @@ namespace PrismWorkList.Login.ViewModels
         /// <summary>
         /// 本番用コンストラクタ
         /// </summary>
-        public LoginViewModel(IRegionManager regionManager,IDbConnection dbConnection)
+        public LoginViewModel(IRegionManager regionManager, ITransactionContext transactionContext)
         {
             this.RegionManager = regionManager;
 
-            this.RisUser = new RisUser(dbConnection);
+            this.RisUser = new RisUser(transactionContext);
 
             // M->VMの接続
             this.UserId = this.RisUser.ObserveProperty(x => x.UserId)
@@ -66,7 +66,7 @@ namespace PrismWorkList.Login.ViewModels
             this.Password = this.RisUser.ObserveProperty(x => x.Password)
                 .ToReactiveProperty()
                 .SetValidateAttribute(() => this.Password);
-            
+
             // パスワードVM->M
             this.Password
                 .Where(x => !this.Password.HasErrors)
@@ -89,7 +89,7 @@ namespace PrismWorkList.Login.ViewModels
                 .ToReadOnlyReactiveProperty();
 
             // CanLogin値が変われば、画面遷移する
-            this.CanLogin.Subscribe(_=>Navigation());
+            this.CanLogin.Subscribe(_ => Navigation());
         }
 
         #region ログイン動作
@@ -104,7 +104,7 @@ namespace PrismWorkList.Login.ViewModels
         /// <summary>
         /// 認証コマンド
         /// </summary>
-        public ReactiveCommand LoginCommand { get; private set;}
+        public ReactiveCommand LoginCommand { get; private set; }
 
         /// <summary>
         /// 画面遷移コマンド

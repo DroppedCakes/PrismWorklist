@@ -1,28 +1,34 @@
 ﻿using Dapper.FastCrud;
 using PrismWorkList.Infrastructure.Models;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PrismWorkList.Infrastructure
 {
     public class OrderPatientViewDao
     {
-        private readonly IDbConnection _dbConnection;
-
-        public OrderPatientViewDao(IDbConnection dbConnection)
+        /// <summary>
+        /// 
+        /// </summary>
+        public OrderPatientViewDao()
         {
-            this._dbConnection = dbConnection;
         }
 
-        public IEnumerable<OrderPatientView> FetchOrders()
-            => _dbConnection.Find<OrderPatientView>();
+        public IEnumerable<OrderPatientView> FetchOrders(IDbConnection db)
+            => db.Find<OrderPatientView>();
 
-        public IEnumerable<OrderPatientView> FetchOrders(string since, string until)
-            => _dbConnection.Find<OrderPatientView>(statement => statement
+        public IEnumerable<OrderPatientView> FetchOrders(IDbConnection db,string currentDate)
+            => db.Find<OrderPatientView>(statement => statement
+            .Where($"{nameof(OrderPatientView.ExaminationDate):C} >= @CurrentDate")
+            .OrderBy($"{nameof(OrderPatientView.ExaminationDate):C}ASC")
+            .WithParameters(new
+            {
+                CurrentDate=currentDate
+            })
+            );
+        
+        public IEnumerable<OrderPatientView> FetchOrders(IDbConnection db,string since, string until)
+            => db.Find<OrderPatientView>(statement => statement
             .Where($"{nameof(OrderPatientView.ExaminationDate):C} >= @DateSince AND @DateUntil>={nameof(OrderPatientView.ExaminationDate):C}")
             .OrderBy($"{nameof(OrderPatientView.ExaminationDate):C}ASC")
             .WithParameters(new
@@ -32,11 +38,11 @@ namespace PrismWorkList.Infrastructure
             })
             );
 
-        public virtual void Update(OrderPatientView examinationOrder)
-            => _dbConnection.Update(examinationOrder);
+        public virtual void Update(IDbConnection db,OrderPatientView examinationOrder)
+            => db.Update(examinationOrder);
 
-        public virtual void Insert(OrderPatientView examinationOrder)
-            => _dbConnection.Insert(examinationOrder);
+        public virtual void Insert(IDbConnection db,OrderPatientView examinationOrder)
+            => db.Insert(examinationOrder);
 
     }
 }
