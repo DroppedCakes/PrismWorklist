@@ -12,11 +12,21 @@ using PrismWorkList.Infrastructure.Models;
 using System.ComponentModel;
 using System.Windows.Data;
 using PrismWorkList.Service;
+using MaterialDesignThemes.Wpf;
+using System.Windows.Input;
+using Prism.Commands;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PrismWorkList.WorkSpace.ViewModels
 {
     public class ViewWorkSpaceViewModel : BindableBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<GenderType> Genders { get; private set; }
+
         /// <summary>
         /// ロガー
         /// </summary>
@@ -36,12 +46,48 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// AutoMapping
         /// ViewOrderPatient→StudyVMに詰め替え
         /// </summary>
-        private readonly IMapper _mapper;
+        private readonly IMapper _studyMapper;
 
         /// <summary>
         /// 一定ポイントで同期させる
         /// </summary>
         private readonly SynchronizationContext _syncer = SynchronizationContext.Current;
+
+        #region 初期読込
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand InitializeCommand => new DelegateCommand(OnInitialize);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnInitialize()
+        {
+            // Mapするモデルの設定
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<Gender, GenderType>();
+            });
+            // Mapperを作成
+            var genderMapper = config.CreateMapper();
+            
+            Genders = _studiesService.GetGenders()
+                .Select(genderMapper.Map<GenderType>)
+                .ToList()
+                .OrderBy(x=>x.Code);
+
+            LoadStudies();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void LoadStudies()
+        {
+
+        }
+
+        #endregion 初期読込
 
         #region 検索条件
 
@@ -87,11 +133,6 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// フィルターやソート機能を提供
         /// </summary>
         public ICollectionView StudiesView { get; }
-
-        /// <summary>
-        /// 初回読込
-        /// </summary>
-        public ReactiveCommand StudiesLoad { get; } = new ReactiveCommand();
 
         /// <summary>
         ///  ワークリスト更新コマンド
@@ -146,7 +187,7 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// <param name="study"></param>
         private void AddStudy(object study)
         {
-            this.AddStudy(_mapper.Map<StudyViewModel>(study));
+            this.AddStudy(_studyMapper.Map<StudyViewModel>(study));
         }
 
         /// <summary>
@@ -159,6 +200,28 @@ namespace PrismWorkList.WorkSpace.ViewModels
         }
 
         #endregion 検査読み込み
+
+        #region SnackBar
+        /// <summary>
+        /// 
+        /// </summary>
+        public SnackbarMessageQueue SnackBarMessageQueue { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReactiveCommand ShowSnackBarCommand { get; } = new ReactiveCommand();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddSnackBarMessage(string value)
+        {
+            this.SnackBarMessageQueue.Enqueue($"{value}SnackBar from ViewModel Now = { DateTime.Now}");
+        }
+
+        #endregion SnackBar
 
         /// <summary>
         /// デザイン用コンストラクタ
@@ -184,16 +247,15 @@ namespace PrismWorkList.WorkSpace.ViewModels
                 cfg.CreateMap<OrderPatientView, StudyViewModel>();
             });
             // Mapperを作成
-           this._mapper = config.CreateMapper();
+           this._studyMapper = config.CreateMapper();
 
             // 検索条件クリアコマンド
             this.SearchCriteriaClearCommand.Subscribe( _=>this.CriteriaClear());
 
-            // 初期読込
-            //this.StudiesReloadCommand.Subscribe(_ => this.CurrentDateSrudiesLoad(DateTime.Now));
-
             // 再読み込みコマンド
             this.StudiesReloadCommand.Subscribe(_ => this.StudiesReload(StudyDateSince.Value,StudyDateUntil.Value));
+
+            this.ShowSnackBarCommand.Subscribe(_ => this.AddSnackBarMessage(DateTime.Now.ToString()));
         }
 
     }

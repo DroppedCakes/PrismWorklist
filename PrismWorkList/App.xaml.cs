@@ -74,7 +74,7 @@ namespace PrismWorkList
 
         private static IStudiesService CreateIStudyService()
         {
-            return new StudiesService(CreateTransactionContext(),new OrderPatientViewDao());
+            return new StudiesService(CreateTransactionContext(),new OrderPatientViewDao(),new PatientDao());
         }
     }
 }

@@ -9,6 +9,7 @@ namespace PrismWorkList.Service
 {
    public interface IStudiesService
     {
+        IList<Gender> GetGenders();
         IList<OrderPatientView> FetchOrderPatientsCurrentDay(string currentDate);
         IList<OrderPatientView> FetchOrderPatients(string since,string until);  
     }

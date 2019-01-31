@@ -58,18 +58,13 @@
             <TextBox.InputBindings>
                 <KeyBinding Command="{Binding LoginCommand}" Gesture="Enter" />
             </TextBox.InputBindings>
-
         </TextBox>
 
-        <Grid Grid.Row="4" Grid.ColumnSpan="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="8" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
+        <StackPanel
+            Grid.Row="4"
+            Grid.Column="4"
+            Orientation="Horizontal">
             <Button
-                Grid.Column="0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Command="{Binding Path=LoginCommand}"
@@ -78,12 +73,12 @@
             </Button>
             <Button
                 x:Name="QuitButton"
-                Grid.Column="2"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Click="QuitButton_Click">
                 終了
             </Button>
-        </Grid>
+
+        </StackPanel>
     </Grid>
 </UserControl>

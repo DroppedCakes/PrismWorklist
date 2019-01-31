@@ -105,24 +105,16 @@ namespace PrismWorkList.Infrastructure.Models
 	}
 
     /// <summary>
-    /// A class which represents the View_1 view.
+    /// A class which represents the Gender table.
     /// </summary>
-	[Table("View_1")]
-	public partial class View1
+	[Table("Gender")]
+	public partial class Gender
 	{
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	    public virtual int ID { get; set; }
-	    public virtual string OrderNumber { get; set; }
-	    public virtual DateTime ExaminationDate { get; set; }
-	    public virtual string ProcessingDivision { get; set; }
-	    public virtual int InfoID { get; set; }
-	    public virtual string ExaminationTypeCode { get; set; }
-	    public virtual string ExaminationTypeName { get; set; }
-	    public virtual string Comment { get; set; }
-	    public virtual string PatientID { get; set; }
-	    public virtual string KanjiName { get; set; }
-	    public virtual string KanaName { get; set; }
-	    public virtual DateTime BirthDate { get; set; }
-	    public virtual string Gender { get; set; }
+		[Key]
+	    public virtual string Code { get; set; }
+	    public virtual string Name { get; set; }
 	}
 
 }

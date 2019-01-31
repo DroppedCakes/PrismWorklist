@@ -15,6 +15,8 @@ namespace PrismWorkList.Infrastructure
         {
         }
 
+        public virtual IEnumerable<Gender> GetGender(IDbConnection db) => db.Find<Gender>();
+
         public virtual PatientInfo FindByPatientID(IDbConnection db,string patientID)
         {
             return db.Find<PatientInfo>(statement =>

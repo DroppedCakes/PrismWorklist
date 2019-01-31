@@ -6,14 +6,17 @@ namespace PrismWorkList.Service
 {
     public class StudiesService : IStudiesService
     {
-        private readonly OrderPatientViewDao _orderPatientViewDao;
-
         private readonly ITransactionContext _transactionContext;
 
-        public StudiesService(ITransactionContext transactionContext,OrderPatientViewDao orderPatientViewDao)
+        private readonly OrderPatientViewDao _orderPatientViewDao;
+
+        private readonly PatientDao _patientDao;
+        
+        public StudiesService(ITransactionContext transactionContext,OrderPatientViewDao orderPatientViewDao,PatientDao patientDao)
         {
-            _orderPatientViewDao = orderPatientViewDao;
             _transactionContext = transactionContext;
+            _orderPatientViewDao = orderPatientViewDao;
+            _patientDao = patientDao;
         }
 
         /// <summary>
@@ -67,8 +70,20 @@ namespace PrismWorkList.Service
                     retv.Add(order);
                 }
             }
-
             return retv;
+        }
+
+        public IList<Gender> GetGenders()
+        {
+            var retv = new List<Gender>();
+            using (var transaction = _transactionContext.Open())
+            {
+                foreach(var gender  in this._patientDao.GetGender(_transactionContext.Connection))
+                {
+                    retv.Add(gender);
+                }
+                return retv;
+            }
         }
     }
 }
