@@ -13,7 +13,10 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        FocusManager.FocusedElement="{Binding ElementName=UserIDBox}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -37,6 +40,7 @@
             VerticalAlignment="Center"
             Kind="Account" />
         <TextBox
+            x:Name="UserIDBox"
             Grid.Row="0"
             Grid.Column="3"
             MaxLength="32"
