@@ -53,7 +53,13 @@
             x:Name="PasswordBox"
             Grid.Row="2"
             Grid.Column="3"
-            Text="{Binding Path=Password.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            Text="{Binding Path=Password.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+
+            <TextBox.InputBindings>
+                <KeyBinding Command="{Binding LoginCommand}" Gesture="Enter" />
+            </TextBox.InputBindings>
+
+        </TextBox>
 
         <Grid Grid.Row="4" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>

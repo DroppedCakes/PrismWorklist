@@ -66,9 +66,9 @@ namespace PrismWorkList.Infrastructure.Models
         {
             using (var transaction = _transactionContext.Open())
             {
-                var userDao = new UserDao(_transactionContext);
+                var userDao = new UserDao();
 
-                var obteinedUser = userDao.FindByLoginId(this.userId);
+                var obteinedUser = userDao.FindByLoginId(_transactionContext.Connection,this.userId);
 
                 transaction.Complete();
 
