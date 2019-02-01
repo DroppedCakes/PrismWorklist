@@ -1,13 +1,13 @@
 ﻿using System.Windows.Controls;
 
-namespace PrismWorkList.Settings.Views
+namespace PrismWorkList.SettingsMenu.Views
 {
     /// <summary>
     /// Interaction logic for Settings
     /// </summary>
-    public partial class Settings : UserControl
+    public partial class SettingsMenu : UserControl
     {
-        public Settings()
+        public SettingsMenu()
         {
             InitializeComponent();
         }

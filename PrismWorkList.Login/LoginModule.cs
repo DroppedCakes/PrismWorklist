@@ -16,7 +16,7 @@ namespace PrismWorkList.Login
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<LoginViewModel>();
-            containerRegistry.RegisterForNavigation<LoginView>();
+            containerRegistry.RegisterForNavigation<Views.Login>();
         }
     }
 }

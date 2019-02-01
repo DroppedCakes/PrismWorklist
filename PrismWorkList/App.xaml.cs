@@ -5,6 +5,7 @@ using PrismWorkList.Infrastructure;
 using PrismWorkList.Login;
 using PrismWorkList.Login.Views;
 using PrismWorkList.Service;
+using PrismWorkList.SettingsMenu;
 using PrismWorkList.Views;
 using PrismWorkList.WorkSpace;
 using System.Configuration;
@@ -28,7 +29,7 @@ namespace PrismWorkList
         {
             base.OnInitialized();
             var region_manager = CommonServiceLocator.ServiceLocator.Current.GetInstance<IRegionManager>();
-            region_manager.RequestNavigate("ContentRegion", nameof(LoginView));
+            region_manager.RequestNavigate("ContentRegion", nameof(Login.Views.Login));
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -42,6 +43,7 @@ namespace PrismWorkList
         {
             moduleCatalog.AddModule<LoginModule>(InitializationMode.WhenAvailable);
             moduleCatalog.AddModule<WorkSpaceModule>();
+            moduleCatalog.AddModule<SettingsModule>();
         }
 
         /// <summary>

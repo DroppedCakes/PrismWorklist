@@ -149,6 +149,10 @@
       <Project>{871d0581-8e19-4dc6-8b40-46fbcb6fce50}</Project>
       <Name>PrismWorkList.Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PrismWorkList.Settings\PrismWorkList.SettingsMenu.csproj">
+      <Project>{dcf92279-1299-4714-8adb-1c02067ef69a}</Project>
+      <Name>PrismWorkList.SettingsMenu</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PrismWorkList.WorkSpace\PrismWorkList.WorkSpace.csproj">
       <Project>{01ad8ef2-a413-40a7-bb09-bbabd04cca1c}</Project>
       <Name>PrismWorkList.WorkSpace</Name>

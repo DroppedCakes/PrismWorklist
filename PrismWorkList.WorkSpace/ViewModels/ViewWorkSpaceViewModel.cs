@@ -6,6 +6,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 using PrismWorkList.Infrastructure.Models;
 using PrismWorkList.Service;
+using PrismWorkList.SettingsMenu.Views;
 using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ using System.Windows.Input;
 
 namespace PrismWorkList.WorkSpace.ViewModels
 {
-    public class ViewWorkSpaceViewModel : BindableBase
+    public class ViewWorkSpaceViewModel : BindableBase, INavigationAware
     {
         /// <summary>
         /// 
@@ -53,6 +54,29 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// </summary>
         private readonly SynchronizationContext _syncer = SynchronizationContext.Current;
 
+        /// <summary>
+        /// 設定画面遷移コマンド
+        /// </summary>
+        public ReactiveCommand NavigateSettingsMenuCommand { get; } = new ReactiveCommand();
+
+        public void NavigateSettingsMenu()
+        {
+            _regionManager.RequestNavigate("ContentRegion", nameof(SettingsMenu));
+        }
+
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            // ログインユーザ名を取得
+            CurrentUser = navigationContext.Parameters["CurrentUser"] as string;
+        }
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+                     => true;
+
         #region 初期読込
         /// <summary>
         /// 
@@ -65,20 +89,21 @@ namespace PrismWorkList.WorkSpace.ViewModels
         private void OnInitialize()
         {
             // Mapするモデルの設定
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.CreateMap<Gender, GenderType>();
             });
             // Mapperを作成
             var genderMapper = config.CreateMapper();
-            
+
             Genders = _studiesService.GetGenders()
                 .Select(genderMapper.Map<GenderType>)
                 .ToList()
-                .OrderBy(x=>x.Code);
+                .OrderBy(x => x.Code);
 
             LoadStudies();
 
-            AddSnackBarMessage($"{DateTime.Now.Date.ToString("yyyyMMdd")}：ログインしました");
+            ShowCurrentUserToSnackBar(CurrentUser);
         }
 
         /// <summary>
@@ -168,16 +193,16 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// <summary>
         /// 検査を再読み込み
         /// </summary>
-        private async void StudiesReload(DateTime since,DateTime until)
+        private async void StudiesReload(DateTime since, DateTime until)
         {
             this.StudiesClear();
 
             await Task.Factory.StartNew(
                 () =>
                 {
-                    foreach (var study in _studiesService.FetchOrderPatients(since.Date.ToString(),until.Date.ToString()))
+                    foreach (var study in _studiesService.FetchOrderPatients(since.Date.ToString(), until.Date.ToString()))
                     {
-                        this._syncer.Post(this.AddStudy,study);
+                        this._syncer.Post(this.AddStudy, study);
                     }
                 }
                 );
@@ -204,6 +229,8 @@ namespace PrismWorkList.WorkSpace.ViewModels
         #endregion 検査読み込み
 
         #region SnackBar
+        private string CurrentUser { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -215,15 +242,21 @@ namespace PrismWorkList.WorkSpace.ViewModels
         public ReactiveCommand ShowSnackBarCommand { get; } = new ReactiveCommand();
 
         /// <summary>
-        /// 
+        /// 与えられた文字列をスナックバーに表示する
         /// </summary>
         /// <param name="value"></param>
         public void AddSnackBarMessage(string value)
-        {
-            this.SnackBarMessageQueue.Enqueue(value);
-        }
+            =>SnackBarMessageQueue.Enqueue(value);
 
+        /// <summary>
+        /// ログインユーザー名をスナックバーに表示する
+        /// </summary>
+        /// <param name="currentUser"></param>
+        private void ShowCurrentUserToSnackBar(string currentUser)
+            => AddSnackBarMessage($"{currentUser}さんでログインしました");
         #endregion SnackBar
+
+        #region コンストラクタ
 
         /// <summary>
         /// デザイン用コンストラクタ
@@ -245,20 +278,24 @@ namespace PrismWorkList.WorkSpace.ViewModels
             this.StudiesView = CollectionViewSource.GetDefaultView(this.Studies);
 
             // Mapするモデルの設定
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.CreateMap<OrderPatientView, StudyViewModel>();
             });
             // Mapperを作成
-           this._studyMapper = config.CreateMapper();
+            this._studyMapper = config.CreateMapper();
 
             // 検索条件クリアコマンド
-            this.SearchCriteriaClearCommand.Subscribe( _=>this.CriteriaClear());
+            this.SearchCriteriaClearCommand.Subscribe(_ => this.CriteriaClear());
 
             // 再読み込みコマンド
-            this.StudiesReloadCommand.Subscribe(_ => this.StudiesReload(StudyDateSince.Value,StudyDateUntil.Value));
+            this.StudiesReloadCommand.Subscribe(_ => this.StudiesReload(StudyDateSince.Value, StudyDateUntil.Value));
 
+            // スナックバー
             this.ShowSnackBarCommand.Subscribe(_ => this.AddSnackBarMessage(DateTime.Now.ToString()));
-        }
 
+            this.NavigateSettingsMenuCommand.Subscribe(_ => this.NavigateSettingsMenu());
+        }
+        #endregion コンストラクタ
     }
 }

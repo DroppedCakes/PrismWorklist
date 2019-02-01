@@ -6,9 +6,9 @@ namespace PrismWorkList.Login.Views
     /// <summary>
     /// Interaction logic for Login
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class Login : UserControl
     {
-        public LoginView()
+        public Login()
         {
             InitializeComponent();
         }

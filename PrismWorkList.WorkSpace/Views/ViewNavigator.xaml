@@ -28,7 +28,7 @@
             Content="検査取消" />
         <Button
             Grid.Column="3"
-            Command="{Binding ShowConfigCommand}"
+            Command="{Binding NavigateSettingsMenuCommand}"
             Content="設定" />
         <Button
             x:Name="QuitButton"

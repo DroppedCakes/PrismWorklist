@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.Infrastructur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.WorkSpace", "PrismWorkList.WorkSpace\PrismWorkList.WorkSpace.csproj", "{01AD8EF2-A413-40A7-BB09-BBABD04CCA1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.Settings", "PrismWorkList.Settings\PrismWorkList.Settings.csproj", "{DCF92279-1299-4714-8ADB-1C02067EF69A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWorkList.SettingsMenu", "PrismWorkList.Settings\PrismWorkList.SettingsMenu.csproj", "{DCF92279-1299-4714-8ADB-1C02067EF69A}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PGTraining", "PGTraining\PGTraining.sqlproj", "{D4835046-3F46-4A28-BA9B-2664F2542F30}"
 EndProject

@@ -1,9 +1,10 @@
-﻿using PrismWorkList.Settings.Views;
+﻿using PrismWorkList.SettingsMenu.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
+using PrismWorkList.SettingsMenu.ViewModels;
 
-namespace PrismWorkList.Settings
+namespace PrismWorkList.SettingsMenu
 {
     public class SettingsModule : IModule
     {
@@ -14,7 +15,8 @@ namespace PrismWorkList.Settings
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            
+            containerRegistry.RegisterSingleton<SettingsViewModel>();
+            containerRegistry.RegisterForNavigation<Views.SettingsMenu>();
         }
     }
 }

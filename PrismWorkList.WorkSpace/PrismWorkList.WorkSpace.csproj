@@ -139,6 +139,10 @@
       <Project>{871D0581-8E19-4DC6-8B40-46FBCB6FCE50}</Project>
       <Name>PrismWorkList.Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PrismWorkList.Settings\PrismWorkList.SettingsMenu.csproj">
+      <Project>{DCF92279-1299-4714-8ADB-1C02067EF69A}</Project>
+      <Name>PrismWorkList.SettingsMenu</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

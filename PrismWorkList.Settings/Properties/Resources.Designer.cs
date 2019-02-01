@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PrismWorkList.Settings.Properties
+namespace PrismWorkList.SettingsMenu.Properties
 {
     using System;
 
