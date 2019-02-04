@@ -6,6 +6,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 using PrismWorkList.Infrastructure.Models;
 using PrismWorkList.Service;
+using PrismWorkList.WorkSpace.Helpers;
 using PrismWorkList.SettingsMenu.Views;
 using Reactive.Bindings;
 using System;
@@ -100,6 +101,8 @@ namespace PrismWorkList.WorkSpace.ViewModels
                 .Select(genderMapper.Map<GenderType>)
                 .ToList()
                 .OrderBy(x => x.Code);
+
+            GenderConverter.SetReSource(Genders);
 
             LoadStudies();
 

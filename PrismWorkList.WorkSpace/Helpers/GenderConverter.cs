@@ -10,16 +10,18 @@ namespace PrismWorkList.WorkSpace.Helpers
 {
     public class GenderConverter : IValueConverter
     {
-       private IEnumerable<GenderType> _genders { get; }
-        
-        public GenderConverter(IEnumerable<GenderType>genders)
+        private static IEnumerable<GenderType> _genders { get; set; }
+
+        public GenderConverter()
         {
-            _genders = genders;
         }
+
+        public static void SetReSource(IEnumerable<GenderType> genderTypes)
+            => _genders = genderTypes;
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            ////    _genders.Select(x=>x.Code)
-            throw new NotImplementedException();
+            return _genders.Where(x => x.Code == value as string).Select(x => x.Name).FirstOrDefault().ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

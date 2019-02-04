@@ -5,7 +5,9 @@
     xmlns:local="clr-namespace:PrismWorkList.WorkSpace.ViewModels"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:prism="http://prismlibrary.com/"
+    xmlns:local1="clr-namespace:PrismWorkList.WorkSpace.Helpers"
     prism:ViewModelLocator.AutoWireViewModel="True">
+   
     <DataGrid
         Margin="0,8,0,0"
         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
@@ -14,6 +16,9 @@
         CanUserAddRows="False"
         CanUserSortColumns="True"
         ItemsSource="{Binding Path=StudiesView}">
+        <DataGrid.Resources>
+            <local1:GenderConverter x:Key="GenderConv"/>
+        </DataGrid.Resources>
         <DataGrid.Columns>
             <DataGridCheckBoxColumn
                 Binding="{Binding IsSelected}"
@@ -59,7 +64,7 @@
                 EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
                 Header="生年月日" />
             <materialDesign:MaterialDataGridTextColumn
-                Binding="{Binding Gender}"
+                Binding="{Binding Gender, Converter={StaticResource GenderConv}}"
                 EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
                 Header="性別" />
             <materialDesign:MaterialDataGridTextColumn
