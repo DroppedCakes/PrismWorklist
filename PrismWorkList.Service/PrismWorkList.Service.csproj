@@ -51,7 +51,9 @@
   <ItemGroup>
     <Compile Include="AuthenticationService.cs" />
     <Compile Include="IAuthenticationService.cs" />
+    <Compile Include="IMessageBoxService.cs" />
     <Compile Include="IStudiesService.cs" />
+    <Compile Include="MessageBoxService.cs" />
     <Compile Include="ServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

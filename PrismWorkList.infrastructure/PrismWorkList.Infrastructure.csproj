@@ -118,6 +118,7 @@
       <DependentUpon>ModelGeneratorConfig.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RisUser.cs" />
+    <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\StudyOrder.cs" />
     <Compile Include="Models\PatientInfo.cs" />
     <Compile Include="OrderPatientViewDao.cs" />
