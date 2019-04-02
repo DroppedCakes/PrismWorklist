@@ -41,50 +41,50 @@ namespace PrismWorkList.Login.ViewModels
         /// </summary>
         public LoginViewModel(IRegionManager regionManager, ITransactionContext transactionContext)
         {
-            this.RegionManager = regionManager;
+            RegionManager = regionManager;
 
-            this.RisUser = new RisUser(transactionContext);
+            RisUser = new RisUser(transactionContext);
 
             // M->VMの接続
-            this.UserId = this.RisUser.ObserveProperty(x => x.UserId)
+            UserId = RisUser.ObserveProperty(x => x.UserId)
                 .ToReactiveProperty()
-                .SetValidateAttribute(() => this.UserId);
+                .SetValidateAttribute(() => UserId);
 
             // VM->Mの接続
-            this.UserId
+            UserId
                 // エラーが無い時
-                .Where(_ => !this.UserId.HasErrors)
+                .Where(_ => !UserId.HasErrors)
                 // モデルに設定
-                .Subscribe(x => this.RisUser.UserId = x);
+                .Subscribe(x => RisUser.UserId = x);
 
             // パスワードM->VM
-            this.Password = this.RisUser.ObserveProperty(x => x.Password)
+            Password = RisUser.ObserveProperty(x => x.Password)
                 .ToReactiveProperty()
-                .SetValidateAttribute(() => this.Password);
+                .SetValidateAttribute(() => Password);
 
             // パスワードVM->M
-            this.Password
-                .Where(x => !this.Password.HasErrors)
-                .Subscribe(x => this.RisUser.Password = x);
+            Password
+                .Where(x => !Password.HasErrors)
+                .Subscribe(x => RisUser.Password = x);
 
             // 入力項目に不備が無ければ押せるコマンド
-            this.LoginCommand = new[]
+            LoginCommand = new[]
             {
-                this.UserId.Select(_=>!this.UserId.HasErrors),
-                this.Password.Select(_=>!this.Password.HasErrors)
+                UserId.Select(_=>!UserId.HasErrors),
+                Password.Select(_=>!Password.HasErrors)
             }
             .CombineLatestValuesAreAllTrue()
             .ToReactiveCommand();
 
             // ログイン認証を試す
-            this.LoginCommand.Subscribe(_ => RisUser.TryLogin());
+            LoginCommand.Subscribe(_ => RisUser.TryLogin());
 
             // ログイン認証が通ればTrue
-            this.CanLogin = this.RisUser.ObserveProperty(x => x.CanLogin)
+            CanLogin = RisUser.ObserveProperty(x => x.CanLogin)
                 .ToReadOnlyReactiveProperty();
 
             // CanLogin値が変われば、画面遷移する
-            this.CanLogin.Subscribe(_ => Navigation());
+            CanLogin.Subscribe(_ => Navigation());
         }
 
         #region ログイン動作
@@ -111,7 +111,7 @@ namespace PrismWorkList.Login.ViewModels
         /// </summary>
         private void Navigation()
         {
-            var param = new Prism.Regions.NavigationParameters();
+            var param = new NavigationParameters();
             param.Add("CurrentUser", UserId.Value);
 
             //　ワークリスト画面に遷移

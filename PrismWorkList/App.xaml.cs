@@ -42,8 +42,8 @@ namespace PrismWorkList
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<LoginModule>(InitializationMode.WhenAvailable);
-            moduleCatalog.AddModule<WorkSpaceModule>();
-            moduleCatalog.AddModule<SettingsModule>();
+            moduleCatalog.AddModule<WorkSpaceModule>(InitializationMode.WhenAvailable);
+            moduleCatalog.AddModule<SettingsModule>(InitializationMode.WhenAvailable);
         }
 
         /// <summary>

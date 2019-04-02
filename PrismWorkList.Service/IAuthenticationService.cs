@@ -2,6 +2,6 @@
 {
     public interface IAuthenticationService
     {
-        bool TryLoginAuthorization(string id, string password);
+        void TryLoginAuthorization(string id, string password);
     }
 }

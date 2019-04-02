@@ -23,10 +23,6 @@
             Command="{Binding ShowPatientCommand}"
             Content="患者情報編集" />
         <Button
-            Grid.Column="2"
-            Command="{Binding OrderCancelCommand}"
-            Content="検査取消" />
-        <Button
             Grid.Column="3"
             Command="{Binding NavigateSettingsMenuCommand}"
             Content="設定" />

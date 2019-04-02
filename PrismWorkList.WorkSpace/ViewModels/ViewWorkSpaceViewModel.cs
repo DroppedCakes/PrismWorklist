@@ -40,6 +40,11 @@ namespace PrismWorkList.WorkSpace.ViewModels
         private readonly IRegionManager _regionManager;
 
         /// <summary>
+        /// 
+        /// </summary>
+        private IRegionNavigationService _regionNavigationService;
+
+        /// <summary>
         /// 検査取得サービス
         /// </summary>
         private readonly IStudiesService _studiesService;
@@ -55,6 +60,8 @@ namespace PrismWorkList.WorkSpace.ViewModels
         /// </summary>
         private readonly SynchronizationContext _syncer = SynchronizationContext.Current;
 
+        #region 画面遷移
+
         /// <summary>
         /// 設定画面遷移コマンド
         /// </summary>
@@ -62,21 +69,34 @@ namespace PrismWorkList.WorkSpace.ViewModels
 
         public void NavigateSettingsMenu()
         {
-            _regionManager.RequestNavigate("ContentRegion", nameof(SettingsMenu));
+            _regionNavigationService.RequestNavigate(nameof(SettingsMenu));
         }
-
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
+            _regionNavigationService = navigationContext.NavigationService;
             // ログインユーザ名を取得
             CurrentUser = navigationContext.Parameters["CurrentUser"] as string;
         }
+
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
                      => true;
+
+        /// <summary>
+        /// 検査詳細画面表示コマンド
+        /// </summary>
+        public ReactiveCommand ShowOrderCommand { get; }
+
+        /// <summary>
+        /// 詳細患者情報表示
+        /// </summary>
+        public ReactiveCommand ShowPatientCommand { get; }
+
+        #endregion 画面遷移
 
         #region 初期読込
         /// <summary>
@@ -298,6 +318,8 @@ namespace PrismWorkList.WorkSpace.ViewModels
             this.ShowSnackBarCommand.Subscribe(_ => this.AddSnackBarMessage(DateTime.Now.ToString()));
 
             this.NavigateSettingsMenuCommand.Subscribe(_ => this.NavigateSettingsMenu());
+
+            //this.ShowOrderCommand.Subscribe();
         }
         #endregion コンストラクタ
     }
